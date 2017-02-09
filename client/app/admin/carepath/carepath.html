@@ -1,0 +1,82 @@
+<div class="row">
+  <form name="carepathForm" ng-submit="carepathForm.$valid && adminCarepath.carepath.steps.length > 0 && adminCarepath.carepath.description.length <= 500 && adminCarepath.save()">
+    <h1>PERCORSO DI CURA</h1>
+    <div class="form-group">
+      <h4 class="">Titolo *</h4>
+      <input class="form-control" ng-model="adminCarepath.carepath.title" bs-has-error required name="carepathTitle">
+    </div>
+    <div class="form-group">
+      <h4 class="section-title">Descrizione *</h4>
+      <textarea class="form-control" name="carepathDescription" ng-model="adminCarepath.carepath.description" bs-has-error required></textarea>
+    </div>
+    <div class="form-group">
+      <h4 class="section-title">Tag *</h4>
+      <p class="small">Inserisci i tag separati da una virgola</p>
+      <textarea class="form-control" name="carepathTags" ng-model="adminCarepath.carepath.tags" ng-list="," bs-has-error required></textarea>
+    </div>
+    <div class="form-group">
+      <h4 class="section-title">Steps *</h4>
+      <div class="container-btn-add">
+        <div class="pull-right">
+          <a href="#" ng-click="adminCarepath.openStepEditor()" class="btn btn-primary" role="button">
+            <i class="fa fa-plus text-success"></i> Aggiungi
+          </a>
+        </div>
+      </div>
+      <div class="dnd-ul">
+        <ul dnd-list="adminCarepath.carepath.steps">
+          <li ng-repeat="step in adminCarepath.carepath.steps"
+              dnd-draggable="step"
+              dnd-moved="adminCarepath.carepath.steps.splice($index, 1)"
+              dnd-effect-allowed="move"
+              dnd-selected="adminCarepath.carepath.selected = step"
+              ng-class="{'selected': adminCarepath.carepath.selected === step}">
+              {{step.title}}
+              <div role="group" style="display: flex; margin: -5px 5px;" class="vertical align pull-right">
+                <button type="button"
+                        class="btn btn-primary"
+                        uib-tooltip="Modifica"
+                        ng-click="adminCarepath.openStepEditor(step)">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-danger margin-left-10"
+                        uib-tooltip="Elimina"
+                        ng-click="adminCarepath.removeStep($index)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+      <p class="small">
+        I campi contrassegnati da * sono obbligatori
+      </p>
+      <div ng-messages="carepathForm.carepathTitle.$error">
+        <p class="text-danger small" ng-message="required">Il titolo è obbligatorio</p>
+      </div>
+      <div ng-messages="carepathForm.carepathDescription.$error">
+        <p class="text-danger small" ng-message="required">La descrizione è obbligatoria</p>
+      </div>
+      <div ng-if="adminCarepath.carepath.description.length > 500">
+        <p class="text-danger small">La descrizione può essere di massimo 500 caratteri</p>
+      </div>
+      <div ng-messages="carepathForm.carepathTags.$error">
+        <p class="text-danger small" ng-message="required">Inserisci almeno un tag</p>
+      </div>
+      <div ng-if="adminCarepath.carepath.steps.length == 0">
+        <p class="text-danger small">Il percorso di cura deve avere almeno uno step</p>
+      </div>
+      <hr/>
+      <a href="/admin/percorsi-cura" class="btn btn-default" role="button">
+        <i class="fa fa-undo text-success"></i> Indietro
+      </a>
+      <div class="pull-right">
+        <button type="button" class="btn btn-danger" ng-show="adminCarepath.carepath._id" ng-click="adminCarepath.remove(adminCarepath.carepath._id)">Elimina</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="carepathForm.$invalid || adminCarepath.carepath.description.length > 500 || adminCarepath.carepath.steps.length == 0">Salva e pubblica</button>
+      </div>
+    </div>
+  </form>
+</div>

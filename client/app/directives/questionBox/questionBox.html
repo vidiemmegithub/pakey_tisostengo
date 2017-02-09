@@ -1,0 +1,7 @@
+<a href='domanda/{{question._id}}' class="questions">
+	<div class="well">
+		<h4>{{question.text}}</h4>
+		<p class="author">{{question.target_user.title}} {{question.target_user.firstname}} {{question.target_user.lastname}}</p>
+		<p class="date-specialization">{{ question.pub_date | date:'longDate' }}</p>
+	</div>
+</a>

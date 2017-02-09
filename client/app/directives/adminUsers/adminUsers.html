@@ -1,0 +1,42 @@
+<table class="table admin-users-list">
+	<thead>
+		<tr>
+		  <th>Nome</th>
+		  <th class="hidden-xs hidden-sm">Email</th>
+		  <th>Data Registrazione</th>
+		  <th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users | filter:filter" ng-if="user.role === role">
+		  <td><a href="/professionista/{{user._id}}">{{user.firstname}} {{user.lastname}}</a></td>
+		  <td class="hidden-xs hidden-sm"><a ng-href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></td>
+		  <td>{{user.reg_date | date }}</td>
+		  <td>
+		    <div role="group">
+		      <button ng-show="user.registrationPending"
+		              ng-click="onActivateUser({ user: user })"
+		              type="button"
+		              class="btn btn-sm btn-success" uib-tooltip="Attiva utente" ng-if="activate">
+		        <i class="fa fa-check"></i>
+		      </button>
+		      <button type="button" class="btn btn-success btn-sm" uib-tooltip="Riattiva utente" ng-click="onRemoveBanUser({ user: user })" ng-if="removeBan">
+		        <i class="fa fa-check"></i>
+		      </button>
+		      <a type="button"
+		         ng-href="/profilo/{{user._id}}"
+		         class="btn btn-primary btn-sm" 
+		         uib-tooltip="Modifica utente">
+		        <i class="fa fa-edit"></i>
+		      </a>
+		      <button type="button" class="btn btn-warning btn-sm" uib-tooltip="Banna utente" ng-click="onBanUser({ user: user })" ng-if="ban">
+		        <i class="fa fa-ban"></i>
+		      </button>
+		      <button type="button" class="btn btn-danger btn-sm" uib-tooltip="Cancella utente" ng-click="onDeleteUser({ user: user })" ng-if="delete">
+		        <i class="fa fa-trash"></i>
+		      </button>
+		    </div>
+		  </td>
+		</tr>
+	</tbody>
+</table>

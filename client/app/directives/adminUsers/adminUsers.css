@@ -1,0 +1,6 @@
+.admin-users-list td:first-of-type{
+	width:30%;
+}
+.admin-users-list button, .admin-users-list a {
+	margin-bottom: 10px;
+}

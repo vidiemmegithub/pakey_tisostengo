@@ -1,0 +1,29 @@
+<div>
+	<h1>Gestione Spalle nelle Home personali</h1>
+	<div class="row">
+	  <div class="col-md-3">  
+	  	<img src="/assets/images/admin/scheme-art-spalla.png" alt="Schema Home redazionale: 1 articolo in evidenza e 5 prioritari" class="page-scheme" width="200">
+	  </div>
+	  <div class="col-md-9">
+	  	<h3>Cosa fare</h3>
+	  	<p>Imposta gli articoli redazionali visibili nella spalla di destra della home personale, che verranno collocati come mostra l'immagine:</p>
+	  	<p><span class="yellow-line"></span>3 articoli redazionali nella spalla di destra nella Home personale degli utenti qualificati</p>
+	  	<p><span class="yellow-line"></span>3 articoli redazionali nella spalla di destra nella Home personale degli utenti non qualificati</p>
+	  	<h3>Come fare</h3>
+	  	<ol>
+	  		<li><strong>Assicurati che gli articoli redazionali siano approvati</strong>. (Non l'hai ancora fatto? <a href="/admin/articoli-redazionali">Fallo ora!</a>)</li>
+	  		<li><strong>Scegli ogni articolo per la Home degli utenti qualificati</strong></li>
+	  		<li><strong>Scegli ogni articolo per la Home degli utenti non qualificati</strong></li>
+	  	</ol>
+	  	<p>Una volta scelto, ogni articolo sarà subito visibile nella Home redazionale</p>
+	  </div>
+	 </div>
+	<div class="row">
+	  <div class="col-md-12">  	
+	  	<h2>Imposta i 3 articoli per la Home degli utenti qualificati</h2>
+	  	<admin-priority articles="spalla.articles.evidence_uq" on-change-article="spalla.changeArticleEvidenceUQ(article)"></admin-priority>
+	  	<h2>Imposta i 3 articoli per la Home degli utenti non qualificati</h2>
+	  	<admin-priority articles="spalla.articles.evidence_unq" on-change-article="spalla.changeArticleEvidenceUNQ(article)"></admin-priority>
+	  </div>
+	</div>
+</div>

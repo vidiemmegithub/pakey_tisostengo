@@ -1,0 +1,36 @@
+.panel-comments textarea.form-control {
+  width: 100% !important;
+  min-height: 34px;
+  max-width: 100%;
+}
+.panel-comments .media-body{
+  padding: 0;
+}
+.panel-comments textarea{
+  box-shadow: none;
+  resize: vertical;
+}
+.panel-comments .old-comments{
+  margin-left: 20px;
+}
+.panel-comments .date-specialization{
+  text-align: right;
+}
+.panel-comments .small{
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+.panel-comments img{
+  border-radius: 5px;
+}
+.btn-delete-comment{
+  color: #fff;
+  line-height: 100%;
+  padding: 7px;
+  margin-left: 20px;
+}
+.btn-delete-comment .fa{
+  margin: 0;
+  color: #fff;
+}

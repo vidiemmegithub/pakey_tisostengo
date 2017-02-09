@@ -1,0 +1,42 @@
+<div class="panel-comments">
+  <h4 class="section-title">Commenti</h4>
+  <form class="form-inline" name="commentForm" ng-submit="commentForm.$valid && addComment(comment.text)">
+    <div class="media-left">
+      <user-image class="media-object" user="getCurrentUser()" width="65" height="45" size="'small'" method="'contain'">
+      </user-image>
+    </div>
+    <div class="media-body">
+      <div class="col-md-9 col-sm-9">
+          <textarea placeholder="Scrivi un commento" rows="2" class="form-control" required ng-model="comment.text"></textarea>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid">Aggiungi</button>
+      </div>
+    </div>
+  </form>
+  <h5>{{comments.length}} {{ comments.length == 1 ? 'commento' : 'commenti' }}</h5>
+  <div class="media old-comments" ng-repeat="comment in comments | orderBy:'-date'">
+    <div class="media-left">
+      <user-image user="comment.author" width="65" height="45" size="'small'" method="'cover'">
+      </user-image>
+    </div>
+    <div class="media-body">
+      <div class="col-md-6">
+        <p class="author">{{comment.author.firstname}} {{comment.author.lastname}}</p>
+      </div>
+      <div class="col-md-6">
+        <p class="date-specialization">{{comment.date | date:'d MMM y, HH:mm'}} 
+          <button type="button" 
+                  class="btn btn-danger btn-delete-comment" 
+                  ng-if='isSelf() || isAdmin()' 
+                  ng-click='deleteComment(comment)'>
+            <i class="fa fa-trash"></i>
+          </button>
+        </p>
+      </div>
+      <div class="clear"></div>
+      <p class="small">{{comment.text}}</p>
+    </div>
+  </div>
+</div>
+  

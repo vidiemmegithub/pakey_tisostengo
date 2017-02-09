@@ -1,0 +1,29 @@
+<div>
+	<h1>Gestione Home redazionale</h1>
+	<div class="row">
+	  <div class="col-md-3">
+	  	<img src="/assets/images/admin/scheme-art-home.png" alt="Schema Home redazionale: 1 articolo in evidenza e 10 prioritari" class="page-scheme" width="200">
+	  </div>
+	  <div class="col-md-9">
+	  	<h3>Cosa fare</h3>
+	  	<p>Imposta gli articoli redazionali visibili nella home redazionale come mostrato nell'immagine:</p>
+	  	<p><span class="purple-line"></span>1 articolo in evidenza</p>
+	  	<p><span class="blue-line"></span>10 articoli prioritari</p>
+	  	<h3>Come fare</h3>
+	  	<ol>
+	  		<li><strong>Assicurati che gli articoli redazionali siano approvati</strong>. (Non l'hai ancora fatto? <a href="/admin/articoli-redazionali">Fallo ora!</a>)</li>
+	  		<li><strong>Scegli l'articolo in evidenza</strong></li>
+	  		<li><strong>Scegli ogni articolo prioritario</strong></li>
+	  	</ol>
+	  	<p>Una volta scelto, ogni articolo sarà subito visibile nella Home redazionale</p>
+	  </div>
+	 </div>
+	<div class="row">
+	  <div class="col-md-12">
+	  	<h2>Imposta l'articolo in evidenza</h2>
+	  	<admin-priority articles="home.articles.evidence" on-change-article="home.changeArticleEvidence(article)"></admin-priority>
+	  	<h2>Imposta i 10 articoli prioritari</h2>
+	  	<admin-priority articles="home.articles.priority" on-change-article="home.changeArticlePriority(article)"></admin-priority>
+	  </div>
+	</div>
+</div>

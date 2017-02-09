@@ -1,0 +1,412 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Il portale della salute a misura di tutti.Integra un network di professionisti (Strutture, medici, commercianti, non profit…) e news, visibili agli utenti privati." />
+  <base href="/">
+  <title>TiSOStengo</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/images/logotisostengo_57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/images/logotisostengo_72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/images/logotisostengo_114.png" />
+  <!-- build:css(client) app/vendor.css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/textAngular/dist/textAngular.css' />
+  <link rel='stylesheet' href='bower_components/components-font-awesome/css/font-awesome.css' />
+  <link rel='stylesheet' href='bower_components/angular-loading-bar/build/loading-bar.css' />
+  <link rel='stylesheet' href='bower_components/metisMenu/dist/metisMenu.css' />
+  <link rel='stylesheet' href='bower_components/angular-toastr/dist/angular-toastr.css' />
+  <link rel='stylesheet' href='bower_components/datatables/media/css/jquery.dataTables.css' />
+  <link rel='stylesheet' href='bower_components/morrisjs/morris.css' />
+  <link rel='stylesheet' href='bower_components/datatables-responsive/css/dataTables.responsive.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-social/bootstrap-social.css' />
+  <link rel='stylesheet' href='bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css' />
+  <link rel='stylesheet' href='bower_components/bootstrap-select/dist/css/bootstrap-select.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <link rel="stylesheet" href="app/admin/admin.css">
+  <link rel="stylesheet" href="app/admin/advertising/advertising.css">
+  <link rel="stylesheet" href="app/admin/articoli-qualificati/articoli-qualificati.css">
+  <link rel="stylesheet" href="app/admin/articoli-redazionali/articoli-redazionali.css">
+  <link rel="stylesheet" href="app/admin/carepath/carepath.css">
+  <link rel="stylesheet" href="app/admin/carepaths/carepaths.css">
+  <link rel="stylesheet" href="app/admin/coupon/coupon.css">
+  <link rel="stylesheet" href="app/admin/domande/domande.css">
+  <link rel="stylesheet" href="app/admin/home-redazionale/home-redazionale.css">
+  <link rel="stylesheet" href="app/admin/messaggi-abusi/messaggi-abusi.css">
+  <link rel="stylesheet" href="app/admin/messaggi-assistenza/messaggi-assistenza.css">
+  <link rel="stylesheet" href="app/admin/messaggi-info/messaggi-info.css">
+  <link rel="stylesheet" href="app/admin/spalle-redazionali/spalle-redazionali.css">
+  <link rel="stylesheet" href="app/admin/specializations/specializations.css">
+  <link rel="stylesheet" href="app/admin/utenti-bannati/utenti-bannati.css">
+  <link rel="stylesheet" href="app/admin/utenti-import/utenti-import.css">
+  <link rel="stylesheet" href="app/admin/utenti-non-qualificati/utenti-non-qualificati.css">
+  <link rel="stylesheet" href="app/admin/utenti-premium/utenti-premium.css">
+  <link rel="stylesheet" href="app/admin/utenti-qualificati/utenti-qualificati.css">
+  <link rel="stylesheet" href="app/admin/utenti-redazionali/utenti-redazionali.css">
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/articoli/articoli.css">
+  <link rel="stylesheet" href="app/articolo/articolo.css">
+  <link rel="stylesheet" href="app/carepath/carepath.css">
+  <link rel="stylesheet" href="app/carepaths/carepaths.css">
+  <link rel="stylesheet" href="app/cercaContenuti/cercaContenuti.css">
+  <link rel="stylesheet" href="app/cercaProfessionisti/cercaProfessionisti.css">
+  <link rel="stylesheet" href="app/chiSiamo/chiSiamo.css">
+  <link rel="stylesheet" href="app/contatta/contatta.css">
+  <link rel="stylesheet" href="app/cookie/cookie.css">
+  <link rel="stylesheet" href="app/directives/adminArticles/adminArticles.css">
+  <link rel="stylesheet" href="app/directives/adminCoupon/adminCoupon.css">
+  <link rel="stylesheet" href="app/directives/adminMessages/adminMessages.css">
+  <link rel="stylesheet" href="app/directives/adminPremium/adminPremium.css">
+  <link rel="stylesheet" href="app/directives/adminPriority/adminPriority.css">
+  <link rel="stylesheet" href="app/directives/adminQuestions/adminQuestions.css">
+  <link rel="stylesheet" href="app/directives/adminUsers/adminUsers.css">
+  <link rel="stylesheet" href="app/directives/advertisement/advertisement.css">
+  <link rel="stylesheet" href="app/directives/articleBox/articleBox.css">
+  <link rel="stylesheet" href="app/directives/articleImage/articleImage.css">
+  <link rel="stylesheet" href="app/directives/articlePreview/articlePreview.css">
+  <link rel="stylesheet" href="app/directives/authorBox/authorBox.css">
+  <link rel="stylesheet" href="app/directives/categoriesDropdown/categoriesDropdown.css">
+  <link rel="stylesheet" href="app/directives/citiesDropdown/citiesDropdown.css">
+  <link rel="stylesheet" href="app/directives/comments/comments.css">
+  <link rel="stylesheet" href="app/directives/commentsBox/commentsBox.css">
+  <link rel="stylesheet" href="app/directives/faiDomanda/faiDomanda.css">
+  <link rel="stylesheet" href="app/directives/myArticlePreview/myArticlePreview.css">
+  <link rel="stylesheet" href="app/directives/panelDashboard/panelDashboard.css">
+  <link rel="stylesheet" href="app/directives/passaPremium/passaPremium.css">
+  <link rel="stylesheet" href="app/directives/professionistaIscriviti/professionistaIscriviti.css">
+  <link rel="stylesheet" href="app/directives/qualifiedBox/qualifiedBox.css">
+  <link rel="stylesheet" href="app/directives/qualifiedDetail/qualifiedDetail.css">
+  <link rel="stylesheet" href="app/directives/questionBox/questionBox.css">
+  <link rel="stylesheet" href="app/directives/questionPreview/questionPreview.css">
+  <link rel="stylesheet" href="app/directives/searchBar/searchBar.css">
+  <link rel="stylesheet" href="app/directives/segnalaAbuso/segnalaAbuso.css">
+  <link rel="stylesheet" href="app/directives/segui/segui.css">
+  <link rel="stylesheet" href="app/directives/serviziPremium/serviziPremium.css">
+  <link rel="stylesheet" href="app/directives/showEditorSignup/showEditorSignup.css">
+  <link rel="stylesheet" href="app/directives/showLogin/showLogin.css">
+  <link rel="stylesheet" href="app/directives/showResetPwd/showResetPwd.css">
+  <link rel="stylesheet" href="app/directives/showSignup/showSignup.css">
+  <link rel="stylesheet" href="app/directives/showUnqualifiedSignup/showUnqualifiedSignup.css">
+  <link rel="stylesheet" href="app/directives/showUnqualifiedSignup/showUnqualifiedSignupConfirmation.css">
+  <link rel="stylesheet" href="app/directives/specializationDropdown/specializationDropdown.css">
+  <link rel="stylesheet" href="app/directives/tagList/tagList.css">
+  <link rel="stylesheet" href="app/directives/userImage/userImage.css">
+  <link rel="stylesheet" href="app/directives/userTypesDropdown/userTypesDropdown.css">
+  <link rel="stylesheet" href="app/domanda/domanda.css">
+  <link rel="stylesheet" href="app/domande/domande.css">
+  <link rel="stylesheet" href="app/domandeInArrivo/domandeInArrivo.css">
+  <link rel="stylesheet" href="app/faiUnaDomanda/faiUnaDomanda.css">
+  <link rel="stylesheet" href="app/home/home.css">
+  <link rel="stylesheet" href="app/main/main.css">
+  <link rel="stylesheet" href="app/mieDomande/mieDomande.css">
+  <link rel="stylesheet" href="app/mieiArticoli/mieiArticoli.css">
+  <link rel="stylesheet" href="app/mieiCommenti/mieiCommenti.css">
+  <link rel="stylesheet" href="app/privacy/privacy.css">
+  <link rel="stylesheet" href="app/professionista/professionista.css">
+  <link rel="stylesheet" href="app/professionisti/professionisti.css">
+  <link rel="stylesheet" href="app/professionistiSeguiti/professionistiSeguiti.css">
+  <link rel="stylesheet" href="app/profilo/profilo.css">
+  <link rel="stylesheet" href="app/registrazioneAvvenuta/registrazioneAvvenuta.css">
+  <link rel="stylesheet" href="app/riepilogoPremium/riepilogoPremium.css">
+  <link rel="stylesheet" href="app/rispondi/rispondi.css">
+  <link rel="stylesheet" href="app/scriviArticolo/scriviArticolo.css">
+  <link rel="stylesheet" href="app/serviziPremium/serviziPremium.css">
+  <link rel="stylesheet" href="app/tag/tag.css">
+  <link rel="stylesheet" href="app/tags/tags.css">
+  <link rel="stylesheet" href="app/terminiCondizioni/terminiCondizioni.css">
+  <link rel="stylesheet" href="components/actionResult/actionResult.css">
+  <link rel="stylesheet" href="components/chooseArticleModal/chooseArticleModal.css">
+  <link rel="stylesheet" href="components/footer/footer.css">
+  <link rel="stylesheet" href="components/messageModal/messageModal.css">
+  <link rel="stylesheet" href="components/modal/modal.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link rel="stylesheet" href="components/premiumModal/premiumModal.css">
+  <link rel="stylesheet" href="components/promptModal/promptModal.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+  <!--Google Font-->
+  <link href='https://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+
+
+  <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+  <!-- Theme: 'light/dark-floating/top/bottom' -->
+  <script type="text/javascript">
+      window.cookieconsent_options = {"message":"Il sito utilizza cookie tecnici di prima e di terze parti. I cookie NON sono utilizzati dal sito per fini di profilazione. Cliccando su OK, l'utente accetta l'utilizzo dei cookie di terze parti che possono essere disabilitati. ","dismiss":"Accetta","learnMore":"Per maggiori informazioni, anche in ordine alla disattivazione, è possibile consultare l'informativa cookie e privacy completa.","link":"/cookie","theme":"light-bottom"};
+  </script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+  <!-- End Cookie Consent plugin -->
+
+</head>
+<body ng-app="tisostengoApp">
+<div id="fb-root"></div>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<!-- Add your site or application content here -->
+<ui-view></ui-view>
+
+<div ng-include="'components/footer/footer.html'"></div>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-72418747-1');
+  ga('send', 'pageview');
+</script>
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<!-- build:js({client,node_modules}) app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/rangy/rangy-core.js"></script>
+<script src="bower_components/rangy/rangy-classapplier.js"></script>
+<script src="bower_components/rangy/rangy-highlighter.js"></script>
+<script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+<script src="bower_components/rangy/rangy-serializer.js"></script>
+<script src="bower_components/rangy/rangy-textrange.js"></script>
+<script src="bower_components/textAngular/dist/textAngular.js"></script>
+<script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+<script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/angular-easyfb/build/angular-easyfb.js"></script>
+<script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="bower_components/metisMenu/dist/metisMenu.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/braintree-web/dist/braintree.js"></script>
+<script src="bower_components/br-validations/releases/br-validations.js"></script>
+<script src="bower_components/string-mask/src/string-mask.js"></script>
+<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+<script src="bower_components/flot/jquery.flot.js"></script>
+<script src="bower_components/holderjs/holder.js"></script>
+<script src="bower_components/eve-raphael/eve.js"></script>
+<script src="bower_components/raphael/raphael.min.js"></script>
+<script src="bower_components/mocha/mocha.js"></script>
+<script src="bower_components/morrisjs/morris.js"></script>
+<script src="bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+<script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
+<script src="bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+<script src="bower_components/angular-load/angular-load.js"></script>
+<script src="bower_components/async/lib/async.js"></script>
+<script src="bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
+<script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+<script src="bower_components/jszip/dist/jszip.js"></script>
+<!-- endbower -->
+<script src="bower_components/angular-i18n/angular-locale_it.js"></script>
+<!-- endbuild -->
+
+
+<!-- build:js({.tmp,client}) app/app.js -->
+
+<script src="app/app.js"></script>
+<!-- injector:js -->
+<script src="app/account/account.js"></script>
+<script src="app/account/settings/settings.controller.js"></script>
+<script src="app/admin/admin.controller.js"></script>
+<script src="app/admin/admin.js"></script>
+<script src="app/admin/advertising/advertising.controller.js"></script>
+<script src="app/admin/advertising/advertising.js"></script>
+<script src="app/admin/articoli-qualificati/articoli-qualificati.controller.js"></script>
+<script src="app/admin/articoli-qualificati/articoli-qualificati.js"></script>
+<script src="app/admin/articoli-redazionali/articoli-redazionali.controller.js"></script>
+<script src="app/admin/articoli-redazionali/articoli-redazionali.js"></script>
+<script src="app/admin/carepath/carepath.controller.js"></script>
+<script src="app/admin/carepath/carepath.js"></script>
+<script src="app/admin/carepaths/carepaths.controller.js"></script>
+<script src="app/admin/carepaths/carepaths.js"></script>
+<script src="app/admin/coupon/coupon.controller.js"></script>
+<script src="app/admin/coupon/coupon.js"></script>
+<script src="app/admin/domande/domande.controller.js"></script>
+<script src="app/admin/domande/domande.js"></script>
+<script src="app/admin/home-redazionale/home-redazionale.controller.js"></script>
+<script src="app/admin/home-redazionale/home-redazionale.js"></script>
+<script src="app/admin/messaggi-abusi/messaggi-abusi.controller.js"></script>
+<script src="app/admin/messaggi-abusi/messaggi-abusi.js"></script>
+<script src="app/admin/messaggi-assistenza/messaggi-assistenza.controller.js"></script>
+<script src="app/admin/messaggi-assistenza/messaggi-assistenza.js"></script>
+<script src="app/admin/messaggi-info/messaggi-info.controller.js"></script>
+<script src="app/admin/messaggi-info/messaggi-info.js"></script>
+<script src="app/admin/spalle-redazionali/spalle-redazionali.controller.js"></script>
+<script src="app/admin/spalle-redazionali/spalle-redazionali.js"></script>
+<script src="app/admin/specializations/specializations.controller.js"></script>
+<script src="app/admin/specializations/specializations.js"></script>
+<script src="app/admin/utenti-bannati/utenti-bannati.controller.js"></script>
+<script src="app/admin/utenti-bannati/utenti-bannati.js"></script>
+<script src="app/admin/utenti-import/utenti-import.controller.js"></script>
+<script src="app/admin/utenti-import/utenti-import.js"></script>
+<script src="app/admin/utenti-import/xlsx.min.js"></script>
+<script src="app/admin/utenti-non-qualificati/utenti-non-qualificati.controller.js"></script>
+<script src="app/admin/utenti-non-qualificati/utenti-non-qualificati.js"></script>
+<script src="app/admin/utenti-premium/utenti-premium.controller.js"></script>
+<script src="app/admin/utenti-premium/utenti-premium.js"></script>
+<script src="app/admin/utenti-qualificati/utenti-qualificati.controller.js"></script>
+<script src="app/admin/utenti-qualificati/utenti-qualificati.js"></script>
+<script src="app/admin/utenti-redazionali/utenti-redazionali.controller.js"></script>
+<script src="app/admin/utenti-redazionali/utenti-redazionali.js"></script>
+<script src="app/apiClient/apiClient.service.js"></script>
+<script src="app/articoli/articoli.controller.js"></script>
+<script src="app/articoli/articoli.js"></script>
+<script src="app/articolo/articolo.controller.js"></script>
+<script src="app/articolo/articolo.js"></script>
+<script src="app/carepath/carepath.controller.js"></script>
+<script src="app/carepath/carepath.js"></script>
+<script src="app/carepaths/carepaths.controller.js"></script>
+<script src="app/carepaths/carepaths.js"></script>
+<script src="app/cercaContenuti/cercaContenuti.controller.js"></script>
+<script src="app/cercaContenuti/cercaContenuti.js"></script>
+<script src="app/cercaProfessionisti/cercaProfessionisti.controller.js"></script>
+<script src="app/cercaProfessionisti/cercaProfessionisti.js"></script>
+<script src="app/chiSiamo/chiSiamo.controller.js"></script>
+<script src="app/chiSiamo/chiSiamo.js"></script>
+<script src="app/contatta/contatta.controller.js"></script>
+<script src="app/contatta/contatta.js"></script>
+<script src="app/cookie/cookie.controller.js"></script>
+<script src="app/cookie/cookie.js"></script>
+<script src="app/directives/adminArticles/adminArticles.directive.js"></script>
+<script src="app/directives/adminCoupon/adminCoupon.directive.js"></script>
+<script src="app/directives/adminMessages/adminMessages.directive.js"></script>
+<script src="app/directives/adminPremium/adminPremium.directive.js"></script>
+<script src="app/directives/adminPriority/adminPriority.directive.js"></script>
+<script src="app/directives/adminQuestions/adminQuestions.directive.js"></script>
+<script src="app/directives/adminUsers/adminUsers.directive.js"></script>
+<script src="app/directives/advertisement/advertisement.directive.js"></script>
+<script src="app/directives/articleBox/articleBox.directive.js"></script>
+<script src="app/directives/articleImage/articleImage.directive.js"></script>
+<script src="app/directives/articlePreview/articlePreview.directive.js"></script>
+<script src="app/directives/authorBox/authorBox.directive.js"></script>
+<script src="app/directives/bsHasError/bsHasError.directive.js"></script>
+<script src="app/directives/categoriesDropdown/categoriesDropdown.directive.js"></script>
+<script src="app/directives/citiesDropdown/citiesDropdown.directive.js"></script>
+<script src="app/directives/comments/comments.directive.js"></script>
+<script src="app/directives/commentsBox/commentsBox.directive.js"></script>
+<script src="app/directives/faiDomanda/faiDomanda.directive.js"></script>
+<script src="app/directives/myArticlePreview/myArticlePreview.directive.js"></script>
+<script src="app/directives/panelDashboard/panelDashboard.directive.js"></script>
+<script src="app/directives/passaPremium/passaPremium.directive.js"></script>
+<script src="app/directives/professionistaIscriviti/professionistaIscriviti.directive.js"></script>
+<script src="app/directives/qualifiedBox/qualifiedBox.directive.js"></script>
+<script src="app/directives/qualifiedDetail/qualifiedDetail.directive.js"></script>
+<script src="app/directives/questionBox/questionBox.directive.js"></script>
+<script src="app/directives/questionPreview/questionPreview.directive.js"></script>
+<script src="app/directives/searchBar/searchBar.directive.js"></script>
+<script src="app/directives/segnalaAbuso/segnalaAbuso.directive.js"></script>
+<script src="app/directives/segui/segui.directive.js"></script>
+<script src="app/directives/serviziPremium/serviziPremium.directive.js"></script>
+<script src="app/directives/showEditorSignup/showEditorSignup.directive.js"></script>
+<script src="app/directives/showLogin/showLogin.directive.js"></script>
+<script src="app/directives/showResetPwd/showResetPwd.directive.js"></script>
+<script src="app/directives/showSignup/showSignup.directive.js"></script>
+<script src="app/directives/showUnqualifiedSignup/showUnqualifiedSignup.directive.js"></script>
+<script src="app/directives/specializationDropdown/specializationDropdown.directive.js"></script>
+<script src="app/directives/tagList/tagList.directive.js"></script>
+<script src="app/directives/userImage/userImage.directive.js"></script>
+<script src="app/directives/userTypesDropdown/userTypesDropdown.directive.js"></script>
+<script src="app/domanda/domanda.controller.js"></script>
+<script src="app/domanda/domanda.js"></script>
+<script src="app/domande/domande.controller.js"></script>
+<script src="app/domande/domande.js"></script>
+<script src="app/domandeInArrivo/domandeInArrivo.controller.js"></script>
+<script src="app/domandeInArrivo/domandeInArrivo.js"></script>
+<script src="app/faiUnaDomanda/faiUnaDomanda.controller.js"></script>
+<script src="app/faiUnaDomanda/faiUnaDomanda.js"></script>
+<script src="app/filters/age/age.filter.js"></script>
+<script src="app/filters/ellipsis/ellipsis.filter.js"></script>
+<script src="app/filters/filterFromList/filterFromList.filter.js"></script>
+<script src="app/filters/gender/gender.filter.js"></script>
+<script src="app/filters/htmlToPlainText/htmlToPlainText.filter.js"></script>
+<script src="app/home/home.controller.js"></script>
+<script src="app/home/home.js"></script>
+<script src="app/main/main.controller.js"></script>
+<script src="app/main/main.js"></script>
+<script src="app/mieDomande/mieDomande.controller.js"></script>
+<script src="app/mieDomande/mieDomande.js"></script>
+<script src="app/mieiArticoli/mieiArticoli.controller.js"></script>
+<script src="app/mieiArticoli/mieiArticoli.js"></script>
+<script src="app/mieiCommenti/mieiCommenti.controller.js"></script>
+<script src="app/mieiCommenti/mieiCommenti.js"></script>
+<script src="app/privacy/privacy.controller.js"></script>
+<script src="app/privacy/privacy.js"></script>
+<script src="app/professionista/professionista.controller.js"></script>
+<script src="app/professionista/professionista.js"></script>
+<script src="app/professionisti/professionisti.controller.js"></script>
+<script src="app/professionisti/professionisti.js"></script>
+<script src="app/professionistiSeguiti/professionistiSeguiti.controller.js"></script>
+<script src="app/professionistiSeguiti/professionistiSeguiti.js"></script>
+<script src="app/profilo/geocodeFuncTest.js"></script>
+<script src="app/profilo/profilo.controller.js"></script>
+<script src="app/profilo/profilo.js"></script>
+<script src="app/registrazioneAvvenuta/registrazioneAvvenuta.controller.js"></script>
+<script src="app/registrazioneAvvenuta/registrazioneAvvenuta.js"></script>
+<script src="app/riepilogoPremium/riepilogoPremium.controller.js"></script>
+<script src="app/riepilogoPremium/riepilogoPremium.js"></script>
+<script src="app/rispondi/rispondi.controller.js"></script>
+<script src="app/rispondi/rispondi.js"></script>
+<script src="app/scriviArticolo/scriviArticolo.controller.js"></script>
+<script src="app/scriviArticolo/scriviArticolo.js"></script>
+<script src="app/serviziPremium/serviziPremium.controller.js"></script>
+<script src="app/serviziPremium/serviziPremium.js"></script>
+<script src="app/sharedData/sharedData.service.js"></script>
+<script src="app/tag/tag.controller.js"></script>
+<script src="app/tag/tag.js"></script>
+<script src="app/tags/tags.controller.js"></script>
+<script src="app/tags/tags.js"></script>
+<script src="app/terminiCondizioni/terminiCondizioni.controller.js"></script>
+<script src="app/terminiCondizioni/terminiCondizioni.js"></script>
+<script src="components/auth/auth.service.js"></script>
+<script src="components/auth/user.service.js"></script>
+<script src="components/footer/footer.controller.js"></script>
+<script src="components/modal/modal.service.js"></script>
+<script src="components/mongoose-error/mongoose-error.directive.js"></script>
+<script src="components/navbar/navbar.controller.js"></script>
+<!-- endinjector -->
+<!-- endbuild -->
+</body>
+</html>

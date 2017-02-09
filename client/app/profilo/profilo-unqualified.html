@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Profilo</h1>
+      <form name="profileForm" novalidate ng-submit="profileForm.$valid && profilo.save('unq')">
+        <div class="row">
+          <h4>Dati utente</h4>
+          <br/>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="name">Nome</label>
+              <input class="form-control" id="name" ng-model="profilo.user.firstname">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="surname">Cognome</label>
+              <input class="form-control" id="surname" ng-model="profilo.user.lastname">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="dateOfBirth">Data di nascita</label>
+              <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" uib-datepicker-popup="dd/MM/yyyy" ng-model="profilo.user.dateOfBirth" on-open-focus="false" show-button-bar="false" is-open="profilo.calendar.opened" alt-input-formats="Data di nascita" ng-click="profilo.openCalendar()" placeholder="gg/mm/aaaa"/>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="gender">Sesso</label><br/>
+              <div class="form-group col-xs-6 col-md-3">
+                <label>
+                  <input type="radio" ng-model="profilo.user.gender" value="M"> M
+                </label>
+              </div>
+              <div class="form-group col-xs-6 col-md-3">
+                <label>
+                  <input type="radio" ng-model="profilo.user.gender" value="F"> F
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="email">Email *</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     required
+                     bs-has-error
+                     ng-model="profilo.user.email">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="phone">Telefono</label>
+              <input class="form-control" id="phone" ng-model="profilo.user.telephone">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="interests">Interessi (separati da una virgola)</label>
+              <textarea class="form-control"
+                        id="interests"
+                        placeholder="Es. salute, benessere"
+                        name="interests"
+                        ng-model="profilo.user.interests"></textarea>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label>Immagine del profilo</label>
+              <div>
+                <img ngf-thumbnail="profilo.user.pictureFile || profilo.user.picture || 'assets/images/uqplaceholder.jpg'" ngf-size="{width: 150, quality: 1}" class="img-insert-preview">
+                <!--
+                <table class="table table-condensed" ng-show="profilo.user.pictureFile">
+                  <tr>
+                    <td>{{profilo.user.pictureFile.name}}</td>
+                    <td>
+                      <a href ng-click="profilo.user.pictureFile = null">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+                -->
+                <button class="btn btn-default"
+                        ng-model="profilo.user.pictureFile"
+                        ngf-select
+                        ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'">
+                  Carica un'immagine
+                </button>
+                <p class="small">L'immagine caricata deve avere dimensione massima di 1MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Indirizzo</h4>
+          <div class="row">
+            <div class="form-group col-sm-5 col-md-5">
+              <label for="address">Via *</label>
+              <input required bs-has-error class="form-control" id="address" ng-model="profilo.user.address">
+            </div>
+            <div class="form-group col-sm-3 col-md-3">
+              <label for="address">Numero civico *</label>
+              <input required bs-has-error class="form-control" id="address" ng-model="profilo.user.addressNumber">
+            </div>
+            <div class="form-group col-sm-4 col-md-4">
+              <label for="city">Comune *</label>
+              <input required bs-has-error class="form-control" id="city" ng-model="profilo.user.city">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="cap">Cap *</label>
+              <input required bs-has-error class="form-control" id="cap" ng-model="profilo.user.zipCode">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="province">Provincia *</label>
+              <select class="form-control" id="province"
+                      ng-model="profilo.user.province"
+                      required
+                      bs-has-error
+                      ng-options="city for city in profilo.cities">
+                <option value="">Seleziona una città</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Cambio password</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="old-password">Vecchia password</label>
+              <input type="password"
+                     class="form-control"
+                     id="old-password"
+                     name="old-password"
+                     ng-model="profilo.user.oldPassword"
+                     bs-has-error
+                     ng-required="profilo.user.password">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="password">Nuova password</label>
+              <input type="password" class="form-control" id="password" ng-model="profilo.user.password">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="password-confirm">Conferma nuova password</label>
+              <input type="password"
+                     class="form-control"
+                     id="password-confirm"
+                     name="password-confirm"
+                     ng-disabled="!profilo.user.password"
+                     bs-has-error
+                     ng-model="profilo.user.passwordConfirm"
+                     ui-validate="'$value==profilo.user.password'"
+                     ui-validate-watch="'profilo.user.password'">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Autorizzazione al trattamento dei dati</h4>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" bs-has-error required name="privacy" ng-model="privacy">
+                  Autorizzo il trattamento dei miei dati personali *
+                  <a href="#">Leggi l'informativa</a>
+                </label>
+              </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <p class="small">* I campi contrassegnati da * sono obbligatori</p>
+          <hr/>
+          <div ng-messages="profileForm.email.$error">
+            <p class="text-danger small" ng-message="required">L'indirizzo email è obbligatorio</p>
+            <p class="text-danger small" ng-message="email">L'indirizzo email non è valido</p>
+          </div>
+          <div ng-messages="profileForm.province.$error || profileForm.city.$error || profileForm.address.$error || profileForm.addressNumber.$error || profileForm.zipCode.$error">
+            <p class="text-danger small" ng-message="required">I campi dell'indirizzo sono obbligatori</p>
+          </div>
+          <div ng-messages="profileForm.privacy.$error">
+            <p class="text-danger small" ng-message="required">Il consenso al trattamento dei dati è obbligatorio</p>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <button type="submit" ng-disabled="profileForm.$invalid" class="btn btn-primary btn-lg">Salva</button>
+        </div>
+      </form>
+      <div class="clearfix"></div>
+      <servizi-premium subscriptions="profilo.user.subscriptions"></servizi-premium>
+    </div>
+    <div class="col-md-3">
+      <passa-premium>Vuoi fare domande private?</passa-premium>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+.import-users p {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.fileinput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileinput + label {
+    min-width: 230px;
+    height: 50px;
+    vertical-align: middle;
+    line-height: 50px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0px 10px;
+    overflow: hidden;
+    text-align: center;
+    color: #337ab7;
+    background-color: rgba(205, 229, 247, 0.4);
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.fileinput + label * {
+    pointer-events: none;
+}
+
+.fileinput + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.35em;
+    margin-right: 0.25em;
+}

@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Domande in arrivo</h1>
+      <uib-tabset>
+        <uib-tab heading="Domande in attesa">
+          <div class="row">
+            <div class="panel-body" ng-if="domandeInArrivo.questions.length <= 0">
+	           <p class="alert-subimportant">Non sono presenti domande in attesa</p>
+	          </div>
+            <ul class="media-list">
+              <li class="box-question" ng-repeat="question in domandeInArrivo.questions | filter: notAnswer">
+                <div class="col-md-8">
+                  <a href="/rispondi/{{question._id}}">
+                    <h4 class="media-heading" ng-bind-html="question.text"></h4>
+                    <p class="date-specialization"><i class="fa fa-sign-in"></i> Domanda arrivata il {{ question.date | date:'longDate' }}</p>
+                    <p class="private-channel" ng-show="question.type === 'private'" style=""><i class="fa fa-key"></i> Domanda privata</p>
+                  </a>
+                </div>
+                <div class="col-md-4 qualified-in-question">
+                  <author-box author='question.author' question-id='{{question._id}}'></author-box>
+                </div>
+                <div class="clear"></div>
+              </li>
+            </ul>
+          </div>
+        </uib-tab>
+        <uib-tab heading="Risposte inviate">
+          <div class="row">
+            <div class="panel-body" ng-if="domandeInArrivo.questions.length <= 0">
+	      <p class="alert-subimportant">Non sono presenti risposte inviate</p>
+	    </div>
+            <ul class="media-list">
+              <li class="box-question" ng-repeat="question in domandeInArrivo.questions | filter: asAnswer">
+                <div class="col-md-8">
+                  <a href="/domanda/{{question._id}}">
+                    <h4 class="media-heading" ng-bind-html="question.text"></h4>
+                    <p class="date-specialization"><i class="fa fa-sign-in"></i> Domanda arrivata il {{ question.date | date:'longDate' }}</p>
+                    <p class="date-specialization"><i class="fa fa-sign-out"></i> Risposta inviata il {{ question.pub_date | date:'longDate' }}</p>
+                    <p class="private-channel" ng-show="question.type === 'private'" style=""><i class="fa fa-key"></i> Domanda privata</p>
+                    <br>
+                  </a>
+                </div>
+                <div class="col-md-4 qualified-in-question">
+                  <author-box author='question.author'></author-box>
+                </div>
+                <div class="clear"></div>
+              </li>
+            </ul>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-body">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{domandeInArrivo.user.statistics.questions.received}} domande ricevute</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{domandeInArrivo.user.statistics.questions.received - domandeInArrivo.user.statistics.answers.sent}} domande in attesa</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{domandeInArrivo.user.statistics.answers.sent}} risposte inviate</p>
+      </div>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Rispondi alla domanda</h1>
+      <div class="row">
+        <form class="col-sm-12 col-md-12 question-content" name="rispondiForm" novalidate ng-submit="rispondiForm.$valid && rispondi.submitAnswer(answer)">
+	  <p class="author">Domanda di {{rispondi.question.author.title}} {{rispondi.question.author.firstname}} {{rispondi.question.author.lastname}}</p>
+	  <p class="date-specialization"><i class="fa fa-sign-in"></i> Domanda arrivata il {{ rispondi.question.date | date:'longDate' }}</p>
+	  <h4 class="question-main">{{rispondi.question.text}}</h4>
+	  <div ng-if="rispondi.question.attachments.length > 0">
+	    <h4 class="section-title">Allegati</h4>
+	    <a ng-repeat="attachment in rispondi.question.attachments" type="button" class="btn btn-default btn-s" target="_blank" download="{{attachment.name}}" ng-href="{{attachment.location}}">{{attachment.name}}</a>
+	  </div>
+	  <h4 class="section-title">Rispondi</h4>
+	  <textarea name="questionText" ng-model="answer.text" required></textarea>
+	  <h4 class="section-title">Categoria *</h4>
+          <categories-dropdown ng-model="answer.category" choose valid-drop-down></categories-dropdown>
+          <h4 class="section-title">Tag</h4>
+          <p class="small">Inserisci i tag separati da una virgola</p>
+          <textarea class="form-control" ng-model="answer.tags"></textarea>
+	  <hr/>
+	  <button type="submit" class="btn btn-primary" ng-disabled="rispondiForm.$invalid">Pubblica</button>
+      	</form>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <author-box author='rispondi.question.author'></author-box>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

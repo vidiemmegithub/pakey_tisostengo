@@ -1,0 +1,14 @@
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.chi-siamo .col-md-9 .row{
+  background: rgba(205,229,247,0.40);
+}
+.chi-siamo .box-dark{
+  background: #3D9CCC;
+}
+.chi-siamo .box-dark h3{
+  text-align: center;
+  color: #fff;
+}

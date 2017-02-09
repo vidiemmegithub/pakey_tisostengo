@@ -1,0 +1,80 @@
+<div class="container main">
+  <div style="margin-bottom: 20px"></div>
+  <!-- <div style="margin-bottom: 20px">
+    <uib-carousel interval="main.myInterval" no-wrap="main.noWrapSlides">
+      <uib-slide ng-repeat="slide in main.slides" active="slide.active">
+        <img ng-src="{{slide.image}}" class="carousel-link" style="margin:auto;" show-signup>
+
+        <!-
+        <div class="carousel-caption">
+          <div style="display: inline-block;">
+            <strong>{{slide.text}}</strong>
+            <a ui-sref="login" class="btn btn-info">Registrati</a>
+          </div>
+        </div>
+        ->
+      </uib-slide>
+    </uib-carousel>
+  </div> -->
+  <div class="row">
+    <div class="col-md-9">
+      <h1 class="page-header">SALUTE E DINTORNI <span>a cura della Redazione</span></h1>
+      <div class="panel-body" ng-if="main.articles.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <div class="row">
+        <div class="col-md-12" ng-repeat="article in main.articles | limitTo:1:0">
+          <a href="articolo/{{article._id}}">
+            <div class="media box-evidence">
+              <div class="media-left">
+                <article-image class="media-object"
+                             article="article"
+                               width="'370'"
+                              height="'246'"
+                                size="'evidence'"
+                              method="'cover'">
+                </article-image>
+              </div>
+              <div class="media-body hidden-xs">
+                <h2 class="media-heading">{{article.title | ellipsis:70 }}</h2>
+                <p class="author">{{article.author.title}} {{article.author.firstname}} {{article.author.lastname}}</p>
+                <p class="date-specialization">{{ article.pub_date | date:'longDate' }}</p>
+                <p ng-bind-html="article.text | ellipsis:290"></p>
+              </div>
+              <div class="panel-body hidden-sm hidden-md hidden-lg">
+                <h2 class="media-heading">{{article.title | ellipsis:90 }}</h2>
+                <p class="author">{{article.author.title}} {{article.author.firstname}} {{article.author.lastname}}</p>
+                <p class="date-specialization">{{ article.pub_date | date:'longDate' }}</p>
+                <p ng-bind-html="article.text | ellipsis:290"></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4" ng-repeat="article in main.articles | limitTo:20:1">
+          <article-preview article='article'></article-preview>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <advertisement home="true"></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I Professionisti rispondono</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="main.questions.length <= 0">
+        <p class="alert-subimportant">Non sono presenti domande</p>
+      </div>
+      <question-box question='question' ng-repeat="question in main.questions | limitTo:4"></question-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I TAG più usati</strong>
+        </div>
+      </div>
+      <tag-list tags='main.tags' limit='15'></tag-list>
+      <advertisement home="true"></advertisement>
+    </div>
+  </div>
+</div>

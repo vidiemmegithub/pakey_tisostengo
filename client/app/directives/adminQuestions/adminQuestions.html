@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+	  <tr>
+	  	<th></th>
+	    <th>Destinatario</th>
+	    <th>Testo</th>
+	    <th ng-if="answered">Data pubblicazione</th>
+	    <th ng-if="!answered">Data creazione</th>
+	    <th></th>
+	  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="question in questions | filter:filter">
+  	<td><p class="private-channel" ng-show="question.type === 'private'" style=""><i class="fa fa-key"></i></p></td>
+  	<td><a href="/professionista/{{question.target_user._id}}">{{question.target_user.firstname}} {{question.target_user.lastname}}</a></td>
+    <td><a href="/domanda/{{question._id}}">{{question.text | ellipsis:140}}</a></td>
+    <td ng-if="answered">{{question.pub_date | date }}</td>
+    <td ng-if="!answered">{{question.date | date }}</td>
+    <td>
+      <div>
+        <button type="button"
+                class="btn btn-danger"
+                uib-tooltip="Elimina domanda"
+                ng-click="onDeleteQuestion({ question: question })" 
+                ng-if="delete">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

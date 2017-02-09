@@ -1,0 +1,153 @@
+<h1>Advertising</h1>
+<div class="row">
+  <div class="pull-right">
+    <button type="button" class="btn btn-primary" ng-click="advertising.create()">
+      <i class="fa fa-plus text-success"></i> Aggiungi
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div ng-if="!advertising.ads.length" class="text-center">
+    <h3>non ci sono banner pubblicitari</h3>
+  </div>
+  <table ng-if="advertising.ads.length" class="table">
+    <thead>
+    <tr>
+      <th>Orario da</th>
+      <th>Orario a</th>
+      <th>Immagine</th>
+      <th>Link</th>
+      <th>Visualizzazioni</th>
+      <th>Guest</th>
+      <th>UQ</th>
+      <th>UNQ</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="ad in advertising.ads" ng-class="{ danger: ad.disabled }">
+      <td class="text-center">{{ ad.validSince | date:'shortTime' }}</td>
+      <td class="text-center">{{ ad.validUntil | date:'shortTime' }}</td>
+      <td>
+        <img ng-src="{{ad.picture}}" height="100" width="100" >
+      </td>
+      <td>
+        <a ng-href="{{ad.link}}" target="_blank">{{ad.link}}</a>
+      </td>
+      <td class="text-center">
+        {{ad.views}}
+      </td>
+      <td class="text-center">
+        <i ng-show="ad.visibility === 'home'" class="fa fa-2x fa-check text-success"></i>
+        <i ng-show="ad.visibility !== 'home'" class="fa fa-2x fa-times text-danger"></i>
+      </td>
+      <td class="text-center">
+        <i ng-show="ad.visibility === 'qualified'" class="fa fa-2x fa-check text-success"></i>
+        <i ng-show="ad.visibility !== 'qualified'" class="fa fa-2x fa-times text-danger"></i>
+      </td>
+      <td class="text-center">
+        <i ng-show="ad.visibility === 'unqualified'" class="fa fa-2x fa-check text-success"></i>
+        <i ng-show="ad.visibility !== 'unqualified'" class="fa fa-2x fa-times text-danger"></i>
+      </td>
+      <td class="">
+        <div role="group" style="display: flex">
+          <button type="button"
+                  class="btn btn-primary"
+                  uib-tooltip="Modifica"
+                  ng-click="advertising.edit(ad)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button ng-if="!ad.disabled"
+                  type="button"
+                  class="btn btn-warning margin-left-10"
+                  uib-tooltip="Disabilita"
+                  ng-click="advertising.disable(ad)">
+            <i class="fa fa-eye-slash"></i>
+          </button>
+          <button ng-if="ad.disabled"
+                  type="button"
+                  class="btn btn-success margin-left-10"
+                  uib-tooltip="Abilita"
+                  ng-click="advertising.enable(ad)">
+            <i class="fa fa-check"></i>
+          </button>
+          <button type="button"
+                  class="btn btn-danger margin-left-10"
+                  uib-tooltip="Elimina"
+                  ng-click="advertising.remove(ad)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/ng-template" id="edit-banner.html">
+  <div class="modal-header">
+    <h3 class="modal-title">{{ isNew ? 'Crea' : 'Aggiorna' }} banner pubblicitario</h3>
+  </div>
+  <form name="bannerForm" novalidate>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group no-minute">
+            <label>Orario da </label>
+            <uib-timepicker ng-model="ad.validSince" show-meridian="false" minute-step="60" required bs-has-error></uib-timepicker>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group no-minute">
+            <label>Orario a </label>
+            <uib-timepicker ng-model="ad.validUntil" show-meridian="false" minute-step="60" required bs-has-error></uib-timepicker>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Immagine</label>
+        <div>
+          <a href>
+            <img ng-if="ad.picture" ngf-src="ad.picture" ngf-select="selectPicture($file)" height="250" width="250" >
+            <button type="button"
+                    class="btn btn-default"
+                    ng-if="!ad.picture"
+                    ngf-select="selectPicture($file)">
+              Seleziona immagine
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Link</label>
+        <input id="link" name="link" type="url" class="form-control" ng-model="ad.link" value="http://" required bs-has-error>
+      </div>
+      <div class="form-group">
+        <div>
+          <label>Visibilità</label>
+        </div>
+        <label class="radio-inline">
+          <input type="radio" name="visibility" ng-model="ad.visibility" value="home" bs-has-error required>Guest
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="visibility" ng-model="ad.visibility" value="qualified" bs-has-error required>UQ
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="visibility" ng-model="ad.visibility" value="unqualified" bs-has-error required>UNQ
+        </label>
+      </div>
+      <div ng-messages="bannerForm.link.$error">
+        <p class="text-danger small" ng-message="url">L'url inserito non è valido (es: http://www.sito.it)</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary"
+              type="submit"
+              ng-disabled="bannerForm.$invalid"
+              ng-click="save()">
+        Salva
+      </button>
+      <button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+    </div>
+  </form>
+</script>

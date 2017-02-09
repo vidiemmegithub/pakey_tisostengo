@@ -1,0 +1,2 @@
+<button class="btn btn-warning btn-sm" ng-if='professionista.role === "qualified" && isLoggedIn() && !isAdmin()' ng-click="segui(professionista._id)" ng-disabled="disable"><i class="fa fa-heart-o"></i>{{ isJustPresent(professionista._id) ?  ' SEGUI GIÀ' : ' SEGUI' }}</button>
+<button show-login type="button" class="btn btn-warning btn-sm" ng-if='professionista.role === "qualified" && !isLoggedIn() && !isAdmin()'><i class="fa fa-heart-o"></i> SEGUI</button>

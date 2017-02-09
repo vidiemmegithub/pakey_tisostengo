@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Codice</th>
+      <th>Valido al</th>
+      <th>Cicli</th>
+      <th>Valore (€)</th>
+      <th>Servizio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="coupon in coupons | filter:filter">
+      <td>{{coupon.text}}</td>
+      <td>{{coupon.validity | date }}</td>
+      <td>{{coupon.numberOfBillingCycles}}</td>
+      <td>{{coupon.amount | currency}}</a></td>
+      <td>{{describeService(coupon.service)}}</td>
+      <td>
+        <button ng-if="editable"
+        				ng-click="onDeleteCoupon({ couponID: coupon._id})"
+                type="button"
+                class="btn btn-sm btn-danger" uib-tooltip="Elimina coupon">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

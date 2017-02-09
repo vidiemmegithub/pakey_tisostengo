@@ -1,0 +1,13 @@
+.no-borders{
+	margin-bottom: 0;
+}
+.no-borders > tbody > tr > td {
+	border-top: 0;
+}
+.border-top td{
+	border-top: 1px solid #CDE6F7 !important;
+}
+.premium-discount{
+	display: inline;
+	margin-right: 10px;
+}

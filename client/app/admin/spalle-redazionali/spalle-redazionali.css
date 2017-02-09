@@ -1,0 +1,16 @@
+.page-scheme{
+	max-width: 100%;
+}
+.purple-line, .blue-line{
+	display: inline-block;
+	width: 25px;
+	height: 0px;
+	margin-right: 10px;
+	border-top: 25px solid;
+}
+.purple-line{
+	border-top-color: #BD10E0;
+}
+.blue-line{
+	border-top-color: #50E1E3;
+}

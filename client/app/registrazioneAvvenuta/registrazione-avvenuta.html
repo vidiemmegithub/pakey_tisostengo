@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel-loggati">
+        <br>
+        <i class="fa fa-smile-o fa-4x"></i>
+        <p class="alert-important">L'indirizzo email &egrave gi&agrave stato verificato</p>
+        <p ng-hide="registrazioneAvvenuta.isLoggedIn()" class="alert-subimportant">Usa l'indirizzo email e la password per accedere</p>
+        <br>
+        <button ng-hide="registrazioneAvvenuta.isLoggedIn()" type="button" class="btn btn-default btn-lg" show-login>ACCEDI</button>
+        <button ng-if="registrazioneAvvenuta.isLoggedIn()" type="button" class="btn btn-default btn-lg" ng-click="registrazioneAvvenuta.goToHome()">VAI ALLA HOME</button>
+      </div>
+    </div>
+</div>

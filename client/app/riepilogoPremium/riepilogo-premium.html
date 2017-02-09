@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Riepilogo</h1>
+      <div class="row">
+        <div class="col-md-8 ">
+          <div class="well">
+            <table class="table no-borders">
+              <tr>
+                <td>
+                  <h4>{{riepilogo.describeService(riepilogo.service.serviceType)}}</h4>
+                </td>
+                <td class="text-right date-specialization">{{riepilogo.service.price | currency:"€/mese":2}}</td>
+              </tr>
+              <tr>
+                <td ng-hide="!riepilogo.discount || riepilogo.discount.verifyError">
+                  <h4 class="premium-discount">{{riepilogo.discount.text}}</h4>
+                  <button ng-show="riepilogo.discount" type="button" class="btn btn-xs btn-primary" uib-tooltip="Elimina coupon" ng-click="riepilogo.discount = null"><i class="fa fa-times"></i></button>
+                </td>
+                <td ng-hide="!riepilogo.discount || riepilogo.discount.verifyError" class="text-right date-specialization">{{riepilogo.discount.amount | currency:"€/mese":2}}<br><span ng-hide="riepilogo.discount.neverExpires">per {{riepilogo.discount.numberOfBillingCycles}} {{riepilogo.discount.numberOfBillingCycles > 1 ? 'mesi' : 'mese'}}</span></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr class="border-top">
+                <td>
+                  <h3>Totale</h3>
+                </td>
+                <td class="text-right date-specialization">
+                  <del ng-hide="!riepilogo.discount || riepilogo.discount.verifyError">{{riepilogo.service.price | currency:"€":2}}/mese</del>
+                  <span ng-hide="!riepilogo.discount || riepilogo.discount.verifyError"><span class="h3">{{(riepilogo.service.price - riepilogo.discount.amount) | currency:"€/mese":2}}</span><br><span ng-hide="riepilogo.discount.neverExpires">per i primi {{riepilogo.discount.numberOfBillingCycles}} {{riepilogo.discount.numberOfBillingCycles > 1 ? 'mesi' : 'mese'}}</span></span>
+                  <span class="h3" ng-show="!riepilogo.discount || riepilogo.discount.verifyError">{{riepilogo.service.price | currency:"€/mese":2}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="date-specialization icon-light-bigger">
+                  <i class="fa fa-cc-amex"></i> <i class="fa fa-cc-visa"></i> <i class="fa fa-cc-mastercard"></i>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="well">
+            <h5>Hai un codice coupon?</h5>
+            <form name="form" action="{{premium.url}}" novalidate method="post">
+              <div class="form-group">
+                <div ng-show="riepilogo.discount.verifyError">{{riepilogo.discount.verifyError}}</div>
+                <input type="text"
+                       class="form-control"
+                       name="discount"
+                       placeholder="Codice Coupon"
+                       ng-model="discountText"/>
+                <button type="button" ng-disabled="discountText === ''" class="btn btn-default form-control" ng-click="riepilogo.checkCoupon(discountText)">VALIDA</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <form id="invoiceForm" novalidate name="invoiceForm">
+        <div class="row">
+          <h4 class="section-title">Dati di Fatturazione</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="firstName">Nome *</label>
+              <input class="form-control" name="firstName" id="firstName" ng-model="riepilogo.address.firstName" bs-has-error required>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="lastName">Cognome *</label>
+              <input class="form-control" name="lastName" id="lastName" ng-model="riepilogo.address.lastName" bs-has-error required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="company">Denominazione Sociale *</label>
+              <input class="form-control" name="company" id="company" ng-model="riepilogo.address.company" bs-has-error required>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="piva">Codice Fiscale / Partita IVA *</label>
+              <input class="form-control" name="piva" id="piva" ng-model="riepilogo.address.piva" bs-has-error required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="streetAddress">Via e numero civico *</label>
+              <input class="form-control" name="streetAddress" id="streetAddress" ng-model="riepilogo.address.streetAddress" bs-has-error required>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="locality">Comune *</label>
+              <input class="form-control" name="locality" id="locality" ng-model="riepilogo.address.locality" bs-has-error required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="postalCode">Cap *</label>
+              <input class="form-control" name="postalCode" id="postalCode" ng-model="riepilogo.address.postalCode" bs-has-error required>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="region">Provincia *</label>
+              <input class="form-control" name="region" id="region" ng-model="riepilogo.address.region" bs-has-error required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="cap">Stato *</label>
+              <select class="form-control" name="countryName" id="countryName"
+                      ng-model="riepilogo.address.countryName"
+                      ng-options="country.countryName as country.countryName for country in riepilogo.countries" bs-has-error required>
+              </select>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Dati per il pagamento</h4>
+          <div id="dropin-container"></div>
+        </div>
+        <div class="row">
+          <p class="small">* I campi contrassegnati da * sono obbligatori</p>
+          <p class="small">Scegliendo <i>Procedi al pagamento</i> accetti <a href="/termini-condizioni" target="_blank">termini e condizoni</a> e <a href="/privacy" target="_blank">privacy</a> di tisostengo.it</p>
+          <hr/>
+          <div ng-messages="invoiceForm.firstName.$error">
+            <p class="text-danger small" ng-message="required">Il nome è obbligatorio</p>
+          </div>
+          <div ng-messages="invoiceForm.lastName.$error">
+            <p class="text-danger small" ng-message="required">Il cognome è obbligatorio</p>
+          </div>
+          <div ng-messages="invoiceForm.company.$error">
+            <p class="text-danger small" ng-message="required">La denominazione sociale è obbligatoria</p>
+          </div>
+          <div ng-messages="invoiceForm.piva.$error">
+            <p class="text-danger small" ng-message="required">Il Codice Fiscale o Partita IVA è obbligatorio</p>
+          </div>
+          <div ng-messages="invoiceForm.streetAddress.$error">
+            <p class="text-danger small" ng-message="required">Via e numero civico sono obbligatori</p>
+          </div>
+          <div ng-messages="invoiceForm.locality.$error">
+            <p class="text-danger small" ng-message="required">Il comune è obbligatorio</p>
+          </div>
+          <div ng-messages="invoiceForm.postalCode.$error">
+            <p class="text-danger small" ng-message="required">Il Cap è obbligatorio</p>
+          </div>
+          <div ng-messages="invoiceForm.region.$error">
+            <p class="text-danger small" ng-message="required">La provincia è obbligatoria</p>
+          </div>
+          <input type="submit" ng-disabled="!invoiceForm.$valid" value="PROCEDI AL PAGAMENTO" class="btn btn-success"/>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

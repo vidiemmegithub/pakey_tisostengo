@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>I miei commenti</h1>
+      <uib-tabset>
+        <uib-tab heading="Articoli">
+          <div class="row">
+      	    <div class="panel-body" ng-if="mieiCommenti.articles.length <= 0">
+      	      <p class="alert-subimportant">Non hai commentato nessun articolo</p>
+      	    </div>
+            <div class="row" infinite-scroll="mieiCommenti.loadMoreArticles()"
+           		infinite-scroll-disabled="mieiCommenti.isLoadingArticles || mieiCommenti.noMoreArticles">
+        			<div class="col-sm-12 col-md-6" ng-repeat="article in mieiCommenti.articles">
+          			<article-preview article='article'></article-preview>
+        			</div>
+      			</div>
+          </div>
+        </uib-tab>
+        <uib-tab heading="Domande">
+          <div class="row">
+      	    <div class="panel-body" ng-if="mieiCommenti.questions.length <= 0">
+      	      <p class="alert-subimportant">Non hai commentato nessuna domanda</p>
+      	    </div>
+            <div class="row" infinite-scroll="mieiCommenti.loadMoreQuestions()"
+           		infinite-scroll-disabled="mieiCommenti.isLoadingQuestions || mieiCommenti.noMoreQuestions">
+			        <ul class="media-list">
+                <question-preview questions='mieiCommenti.questions'></question-preview>
+			        </ul>
+      			</div>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+    <div class="col-md-3">
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

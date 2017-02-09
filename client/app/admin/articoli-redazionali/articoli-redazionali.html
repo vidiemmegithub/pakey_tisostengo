@@ -1,0 +1,24 @@
+<h1>Articoli Redazionali</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <search-bar model="articoli.searchText"></search-bar>
+    <uib-tabset justified="true">
+      <uib-tab heading="Articoli approvati">
+        <admin-articles articles="articoli.filteredArticles"
+                        published="true"
+                        editorial="true"
+                        on-unpublish-article="articoli.unpublish(article)"
+                        on-delete-article="articoli.delete(article)">
+        </admin-articles>
+      </uib-tab>
+      <uib-tab heading="Articoli da approvare">
+        <admin-articles articles="articoli.filteredArticles"
+                        published="false"
+                        editorial="true"
+                        on-publish-article="articoli.publish(article)"
+                        on-delete-article="articoli.delete(article)">
+        </admin-articles>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+</div>

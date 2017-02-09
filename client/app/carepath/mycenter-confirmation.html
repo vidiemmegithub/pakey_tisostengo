@@ -1,0 +1,27 @@
+<div class="mycenter-confirmation-popup">
+  <div class="modal-header">
+    <h3 class="modal-title">Indicaci la tua posizione, troveremo gli specialisti più vicini a te</h3>
+  </div>
+  <div class="modal-body">
+    <form name="myaddressValidationForm">
+      <h3>Effettua una ricerca</h3>
+      <div class="address-search">
+        <input type="text" class="col-xs-8 col-md-9 address-search-input" ng-model="carepath.searchAddressString" ng-change="carepath.emptySearchAddress(carepath.searchAddressString)" placeholder="Via Rossi 1 Milano">
+        <button type="button" class="col-xs-3 col-md-2 btn btn-primary btn-lg address-search-button" ng-click="carepath.searchAddress(carepath.searchAddressString)">Cerca</button>
+      </div>
+      <p style="color:#D0021B;" ng-if="carepath.searchAddressError === true">Il numero civico è richiesto</p>
+      <h3>Posizioni suggerite:</h3>
+      <p ng-if="carepath.myaddress.suggestions.length == 0">Non abbiamo trovato corrispondenze</p>
+      <div class="address-suggestions">
+        <div ng-repeat="suggestion in carepath.myaddress.suggestions">
+          <input type="radio" class="address-suggestions-i" id="address-suggestion-{{$index}}" ng-model="carepath.myaddress.selected" value="{{$index}}" required>
+          <label class="address-suggestions-l" for="address-suggestion-{{$index}}">{{suggestion.formattedAddress}}</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+    <button class="btn btn-primary" type="button" ng-disabled="myaddressValidationForm.$invalid || carepath.myaddress.suggestions.length == 0" ng-click="$close()">Procedi</button>
+  </div>
+</div>

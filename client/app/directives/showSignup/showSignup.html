@@ -1,0 +1,37 @@
+<h1 class="modal-title text-center">Registrati</h1>
+<div class="modal-body registration">
+  <p class="text-center alert-important">Che tipo di utente sei?</p>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-1 well feature-list" show-unqualified-signup="$dismiss('registerUnqualified')">
+      <div class="text-center">
+        <i class="fa fa-user"></i>
+        <h2 class="user-type-unq">Privato</h2>
+      </div>
+      <ul class="fa-ul alert-normal">
+        <li><i class="fa-li fa fa-check text-success"></i>Fai domande ai professionisti</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Commenta e scambia opnioni con le altre persone</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Segui i professionisti e leggi i contenuti completi pubblicati</li>
+      </ul>
+    </div>
+    <div class="col-sm-4 col-sm-offset-2 well feature-list" ng-click="$dismiss('registerQualified')">
+      <div class="text-center">
+        <i class="fa fa-user-md"></i>
+        <h2 class="user-type-uq">Professionista</h2>
+      </div>
+      <ul class="fa-ul alert-normal">
+        <li><i class="fa-li fa fa-check text-success"></i>Fai e ricevi domande</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Commenta e scambia opinioni con le altre persone</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Segui i professionisti e leggi i contenuti completi pubblicati</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Scrivi i tuoi contenuti</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Promuovi la tua attività</li>
+        <li><i class="fa-li fa fa-check text-success"></i>Crea la tua rete professionale</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small">
+    <a href show-login ng-click="$dismiss('login')">
+      Hai già un account? Accedi!
+    </a>
+  </p>
+</div>
+

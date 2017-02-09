@@ -1,0 +1,104 @@
+/*NAV BAR*/
+/*Navbar with logo*/
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-text {
+  margin-left: 15px;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+  color: #3D9CCC;
+}
+
+.navbar-primary{
+  background: #3D9CCC;
+  border-top: 4px solid #CDE6F7;
+  margin-bottom: 0;
+}
+.navbar-brand{
+  height: initial;
+}
+.navbar-form .form-group.clearfix, .navbar-form .radio.clearfix{
+  display: block;
+}
+.navbar-form .btn-lg, .btn-group-lg > .btn {
+  min-height: 46px;
+}
+.navbar-form .form-control{
+  border: none;
+  margin-right: 10px;
+}
+.navbar-form .form-control button{
+  margin: 0;
+}
+.navbar-default{
+  background: #CDE6F7;
+  border: none;
+}
+.navbar-default .navbar-nav > li > a{
+  font-size:19px;
+  color:#3353A0;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.navbar-default .navbar-nav .login-register-button {
+  padding-left: 0px;
+  padding-right: 15px;
+}
+.navbar-nav > li > a{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-form .radio label{
+  color: #fff;
+  font-size: 16px;
+}
+.navbar-form .radio label:first-of-type{
+  margin-right: 15px;
+}
+.navbar-form .radio input{
+  marign-right: 10px;
+}
+/*Secondary navbar*/
+.main-nav > li > a{
+  line-height: 40px;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+  color: #fff;
+  background-color: #86B9E3;
+}
+.navbar-default .secondary-nav > .active > a, .navbar-default .secondary-nav > .active > a:hover, .navbar-default .secondary-nav > .active > a:focus  {
+  background: none;
+}
+.secondary-nav li a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+/*Logged user*/
+.navbar .btn-group img{
+  margin: -6px 10px -6px -12px;
+}
+.navbar .dropdown-menu {
+  max-height: none;
+  overflow: auto;
+}
+.navbar .btn-group.dropdown{
+  margin-top: 8px;
+  margin-right: 15px;
+}
+/*Logo responsive*/
+@media (max-width: 768px){
+  .logo{
+    width: 70%;
+    height: inherit;
+  }
+}
+/*Ricerca responsive*/
+@media (min-width: 768px){
+  .navbar-form input.form-control{
+    width: 280px;
+    max-width: 100%;
+  }
+}

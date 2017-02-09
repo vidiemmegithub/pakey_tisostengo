@@ -1,0 +1,8 @@
+node_modules
+.tmp
+client/bower_components
+dist
+npm-debug.log
+server/db
+client/app/.DS_Store
+server/api/user/utenti-non-importati.xlsx

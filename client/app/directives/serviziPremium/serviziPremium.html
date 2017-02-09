@@ -1,0 +1,21 @@
+<div ng-if="!!subscriptions">
+  <h4 class="section-title">Servizi Premium Attivi</h4>
+  <table class="table table-hover">
+    <tr ng-if="subscriptions.length < 1">
+      <td>Nessun Servizio Premium attivo</td>
+      <td class="text-right"></td>
+    </tr>  
+    <tr ng-repeat="subscription in subscriptions" ng-if="subscription.active">
+      <td>{{describeService(subscription.name)}}</td>
+      <td class="text-right">
+      	<span class="small" ng-if="!!subscription.deactivation_date">
+      				Servizio disattivato, disponibile fino al {{subscription.deactivation_date | date}}
+      	</span>
+        <button ng-disabled="!!subscription.deactivation_date"
+        				ng-click="removeService(subscription, $index)" 
+        				class="btn btn-warning btn-xs margin-left-10">DISATTIVA
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

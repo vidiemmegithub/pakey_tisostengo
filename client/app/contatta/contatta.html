@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Contatta tiSOStengo</h1>
+      <form name="contactForm" novalidate ng-submit="contactForm.$valid && contatta.send(contatta.message)">
+        <div class="row">
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-12">
+              <label for="province">Scegli il tipo di comunicazione *</label>
+              <select class="form-control"
+                      id="type"
+                      name="type"
+                      ng-model="contatta.message.type"
+                      required
+                      bs-has-error
+                      ng-options="motivation.id as motivation.text for motivation in contatta.motivations">
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="firstname">Nome *</label>
+              <input class="form-control" id="firstname" name='firstname' required ng-model="contatta.message.firstname" bs-has-error>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="lastname">Cognome *</label>
+              <input class="form-control" id="lastname" name='lastname' required ng-model="contatta.message.lastname" bs-has-error>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="email">Email *</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     pattern="[a-z0-9._%+-]+@(?!mailinator)[a-z0-9.-]+\.[a-z]{2,4}$"
+                     bs-has-error
+                     required
+                     ng-model="contatta.message.email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-12">
+              <label for="message">Testo del messaggio *</label>
+              <textarea class="form-control" id="message" name="message" ng-model="contatta.message.text" required bs-has-error></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-12">
+              <label for="url">Pagina segnalata</label>
+              <input class="form-control" id="url" ng-model="contatta.message.url">
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <p class="small">* I campi contrassegnati da * sono obbligatori</p>
+          <hr/>
+          <div ng-messages="contactForm.firstname.$error">
+            <p class="text-danger small" ng-message="required">Il nome è obbligatorio</p>
+          </div>
+          <div ng-messages="contactForm.lastname.$error">
+            <p class="text-danger small" ng-message="required">Il cognome è obbligatorio</p>
+          </div>
+          <div ng-messages="contactForm.email.$error">
+            <p class="text-danger small" ng-message="email">L'indirizzo email non è valido</p>
+            <p class="text-danger small" ng-message="required">L'indirizzo email è obbligatorio</p>
+          </div>
+          <div ng-messages="contactForm.message.$error">
+            <p class="text-danger small" ng-message="required">Il testo del messaggio è obbligatorio</p>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid">Invia Richiesta</button>
+        <hr/>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

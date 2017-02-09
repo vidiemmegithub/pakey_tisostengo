@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row user-counter-action" ng-if="home.isQualified() || home.user.registrationPending">
+        <div class="col-xs-12 col-sm-3">
+          <p class="user-counter"><i class="fa fa-heart-o"></i> {{home.user.statistics.followed}} seguiti</p>
+          <p class="user-counter"><i class="fa fa-heart-o"></i> {{home.user.statistics.follower}} ti seguono</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.questions.sent}} domande inviate</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.answers.received}} risposte ricevute</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.questions.received}} domande ricevute</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.answers.sent}} risposte inviate</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <p class="user-counter"><i class="fa fa-file-text"></i></i> {{home.user.statistics.articles}} articoli pubblicati</p>
+        </div>
+      </div>
+      <div class="row user-counter-action" ng-if="home.isUnqualified() && !home.user.registrationPending">
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-heart-o"></i> {{home.user.statistics.follower}} seguiti</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.questions.sent}} domande inviate</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.answers.received}} risposte ricevute</p>
+        </div>
+      </div>
+      <div class="row user-counter-action" ng-if="home.isEditor()">
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-heart-o"></i> {{home.user.statistics.followed}} seguiti</p>
+          <p class="user-counter"><i class="fa fa-heart-o"></i> {{home.user.statistics.follower}} ti seguono</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.questions.sent}} domande inviate</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{home.user.statistics.answers.received}} risposte ricevute</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="user-counter"><i class="fa fa-file-text"></i></i> {{home.user.statistics.articles}} articoli pubblicati</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel-body" ng-if="home.articles.length <= 0">
+          <p class="alert-important">Inizia a seguire i professionisti per rimanere aggiornato sulle loro pubblicazioni</p>
+        </div>
+        <div class="col-sm-12 col-md-6" ng-repeat="article in home.articles">
+          <article-preview article='article'></article-preview>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 user-counter-action">
+      <div class="panel" ng-if="home.isQualified() || home.isEditor()">
+          <p class="user-action"><a href="/scrivi-articolo"><i class="fa fa-file-text"></i> Scrivi un articolo</a></p>
+          <p class="user-action" ng-hide="home.isEditor()"><a href="/domande-in-arrivo"><i class="fa fa-comments"></i> Rispondi alle domande</a></p>
+      </div>
+      <passa-premium>Scopri i vantaggi di Premium</passa-premium>
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>Scritti dalla redazione</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="home.articlesRed.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <article-box article='articleRed' ng-repeat="articleRed in home.articlesRed | limitTo:3"></article-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I miei professionisti rispondono</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="home.questions.length <= 0">
+        <p class="alert-subimportant">Non sono presenti domande</p>
+      </div>
+      <question-box question='question' ng-repeat="question in home.questions | limitTo:4"></question-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I miei ultimi commenti</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="home.comments.length <= 0">
+        <p class="alert-subimportant">Non sono presenti commenti</p>
+      </div>
+      <comments-box comment='comment' ng-repeat="comment in home.comments | limitTo:4"></comments-box>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

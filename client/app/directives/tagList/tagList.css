@@ -1,0 +1,15 @@
+/*---------------Tag*/
+.label{
+    font-size:16px;
+    font-weight: normal;
+    color:#FFFFFF;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.label-default{
+    background: #B3B3B3;
+    cursor: pointer;
+}
+
+/*---------------End of Tag*/

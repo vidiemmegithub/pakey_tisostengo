@@ -1,0 +1,30 @@
+<li class="box-question" ng-repeat="question in questions">
+  <div class="col-md-8">
+    <a href="/domanda/{{question._id}}">
+      <h4 class="media-heading" ng-bind-html="question.text"></h4>
+      <p class="date-specialization">{{ question.pub_date | date:'longDate' }}</p>
+    </a>
+  </div>
+  <div class="col-md-4 qualified-in-question">
+    <div class="media well">
+      <a href="professionista/{{question.target_user._id}}">
+        <h3 class="media-heading">{{question.target_user.title}} {{question.target_user.firstname}} {{question.target_user.lastname}}</h3>
+      </a>
+      <div class="media-left">
+        <user-image class="media-object"
+           user="question.target_user"
+          width="90"
+         height="60"
+           size="'small'"
+         method="'contain'">
+        </user-image>
+      </div>
+      <div class="media-body">
+        <p class="date-specialization">{{question.target_user.specialization}}</p>
+        <p class="author">{{question.target_user.city}}</p>
+      </div>
+      <fai-domanda user-id="question.target_user._id"  ng-if='question.target_user.role === "qualified"'></fai-domanda>
+    </div>
+  </div>
+  <div class="clear"></div>
+</li>

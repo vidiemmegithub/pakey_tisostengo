@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="row">
+    <form name="articleForm" novalidate
+          ng-submit="articleForm.$valid && scriviArticolo.submitArticle(scriviArticolo.article)">
+      <div class="col-md-9">
+        <div class="row">
+          <h1>{{ scriviArticolo.isExistingArticle ? 'Modifica l\'articolo' : 'Scrivi un articolo' }}</h1>
+        </div>
+        <div lass="row">
+          <div class="form-group">
+            <label><h4>Titolo *</h4></label>
+            <input class="form-control" ng-model="scriviArticolo.article.title" bs-has-error required name="title">
+          </div>
+          <h4 class="section-title">Immagine principale che comparirà nelle liste e sarà la prima immagine dell'articolo</h4>
+          <img ngf-thumbnail="scriviArticolo.article.pictureFile || scriviArticolo.article.thumbnail || 'assets/images/placeholder/article_placeholder_medium.jpg'" ngf-size="{width: 150, quality: 1}" class="img-insert-preview">
+          <button class="btn btn-default"
+                  ng-model="scriviArticolo.article.pictureFile"
+                  ngf-select
+                  ngf-pattern="'image/*'"
+                  ngf-accept="'image/*'">Carica un'immagine
+          </button>
+          <!--
+          p ng-show="!scriviArticolo.hasPicture(scriviArticolo.article)">Nessuna immagine</p>
+          <img ngf-thumbnail="scriviArticolo.article.pictureFile || 'assets/images/placeholder/article_placeholder_medium.jpg'">
+          <table class="table table-condensed" ng-show="scriviArticolo.article.pictureFile">
+            <tr>
+              <td>{{scriviArticolo.article.pictureFile.name}}</td>
+              <td>
+                <a href ng-click="scriviArticolo.article.pictureFile = null">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a>
+              </td>
+            </tr>
+          </table>
+          <table class="table table-condensed" ng-show="scriviArticolo.article.thumbnail">
+            <tr>
+              <td>existing-article-image</td>
+              <td>
+                <a href ng-click="scriviArticolo.article.thumbnail = null">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a>
+              </td>
+            </tr>
+          </table>
+          -->
+          
+          <h4 class="section-title">Contenuto *</h4>
+          <p class="small">L'articolo può contenere testo e video precaricati su YouTube</p>
+          <!--
+          <text-angular name="text" ng-model="scriviArticolo.article.text" ta-paste="scriviArticolo.stripFormat($html)" required></text-angular>
+          -->
+          
+          <text-angular name="text" ng-model="scriviArticolo.article.text" required></text-angular>
+          
+          
+          <div class="panel hidden-md hidden-lg">
+            <h4 class="section-title">Categoria *</h4>
+            <categories-dropdown name="category"
+                                 ng-model="scriviArticolo.article.category"
+                                 choose="{{scriviArticolo.article.category}}"
+                                 valid-drop-down>
+
+            </categories-dropdown>
+            <h4 class="section-title">Tag *</h4>
+            <p class="small">Inserisci i tag separati da una virgola</p>
+            <textarea class="form-control" name="tags" ng-list ng-model="scriviArticolo.article.tags" required></textarea>
+          </div>
+          <hr/>
+          <p class="small">
+            I campi contrassegnati da * sono obbligatori
+          </p>
+          <div ng-messages="articleForm.title.$error">
+            <p class="text-danger small" ng-message="required">Il titolo dell'articolo è obbligatorio</p>
+          </div>
+          <div ng-messages="articleForm.text.$error">
+            <p class="text-danger small" ng-message="required">Il testo dell'articolo è obbligatorio</p>
+          </div>
+          <div ng-messages="articleForm.category.$error">
+            <p class="text-danger small" ng-message="required">La categoria dell'articolo è obbligatoria</p>
+          </div>
+          <div ng-messages="articleForm.tags.$error">
+            <p class="text-danger small" ng-message="required">I tags dell'articolo sono obbligatori</p>
+          </div>
+          <hr/>
+          <button type="submit" class="btn btn-primary" ng-disabled="articleForm.$invalid">Salva e pubblica</button>
+          <button type="button" class="btn btn-danger" ng-show="scriviArticolo.isExistingArticle" ng-click="scriviArticolo.deleteArticle()">Elimina</button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel hidden-xs hidden-sm">
+          <p>
+            <button type="submit" class="btn btn-primary" ng-disabled="articleForm.$invalid">Salva e pubblica</button>
+          </p>
+          <p>
+            <button type="button" class="btn btn-danger" ng-show="scriviArticolo.isExistingArticle" ng-click="scriviArticolo.deleteArticle()">Elimina</button>
+          </p>
+        </div>
+        <div class="panel hidden-xs hidden-sm">
+          <h4 class="section-title">Categoria *</h4>
+          <categories-dropdown name="category"
+                               ng-model="scriviArticolo.article.category"
+                               choose="{{scriviArticolo.article.category}}"
+                               valid-drop-down>
+
+          </categories-dropdown>
+          <h4 class="section-title">Tag *</h4>
+          <p class="small">Inserisci i tag separati da una virgola</p>
+          <textarea class="form-control" name="tags" ng-list ng-model="scriviArticolo.article.tags" required></textarea>
+        </div>
+        <hr class="hidden-md hidden-lg">
+        <div class="row">
+          <div class="col-xs-6 col-md-12">
+            <advertisement></advertisement>
+          </div>
+          <div class="col-xs-6 col-md-12">
+            <advertisement></advertisement>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

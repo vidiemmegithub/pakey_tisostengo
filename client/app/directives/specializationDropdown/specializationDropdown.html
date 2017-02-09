@@ -1,0 +1,12 @@
+<div class="btn-group" uib-dropdown dropdown-append-to-body>
+  <button type="button" class="btn btn-default" uib-dropdown-toggle>
+    {{model.$viewValue || defaultValue }} <span class="caret"></span>
+  </button>
+  <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+    <li ng-repeat="specialization in specializations" role="menuitem"
+        ng-class="{ active: model.$viewValue.value === specialization.value }">
+      <a ng-if='specialization.item' href ng-click="model.$setViewValue(specialization.value)">{{specialization.value}}</a>
+      <a ng-if='!specialization.item' class="level0">{{specialization.value}}</a>
+    </li>
+  </ul>
+</div>

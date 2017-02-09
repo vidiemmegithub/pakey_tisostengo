@@ -1,0 +1,58 @@
+<h1>QUESTIONARIO</h1>
+<form name="carepath_questionnaire_form" class="carepath_questionnaire_form">
+  <div class="disclaimer">
+    Ricordati che per casi di pericolo immediato devi chiamare subito il Servizio Sanitario di Urgenza ed Emergenza e chiedere aiuto (in alcune zone è già in funzione il Numero Unico Europeo 112, in molte altre ancora il 118).
+    <p>Ricordati di consultare il tuo medico di base e di seguire tutte le prescrizioni e le visite di controllo degli specialisti a cui ti sei già rivolto e che fanno parte del tuo attuale percorso di cura.</p>
+  </div>
+  <div ng-repeat="step in carepath.carepath.steps | filter: carepath.filterStepsByQuestion as filtered track by $index" ng-show="carepath.currentStep == $index">
+    <div class="index">DOMANDA {{$index+1}} di {{filtered.length}}</div>
+    <div class="question">{{step.question.text}}</div>
+    <div class="answer">
+      <span class="col-xs-6">
+        <div class="pull-right">
+          <input type="radio" class="answer-i" id="answer-no-{{$index}}" name="answer" ng-model="step.question.answer" value="no" ng-required="answer!=''">
+          <label class="answer-l" for="answer-no-{{$index}}">NO</label>
+        </div>
+      </span>
+      <span class="col-xs-6">
+        <div class="pull-left">
+          <input type="radio" class="answer-i pull-left" id="answer-yes-{{$index}}" name="answer" ng-model="step.question.answer" value="yes" ng-required="answer!=''">
+          <label class="answer-l pull-left" for="answer-yes-{{$index}}">SI</label>
+        </div>
+      </span>
+    </div>
+    <div class="q-buttons">
+      <div ng-if="$first && filtered.length != 1" class="single-q-button">
+        <a href ='#' class="btn btn-primary btn-lg q-button" ng-click="carepath.next($index)">Avanti</a>
+      </div>
+      <div ng-if="$last && filtered.length == 1" class="single-q-button">
+        <button type="submit" class="btn btn-primary btn-lg q-button confirm" ng-click="carepath.confirm()">OK</button>
+      </div>
+      <div ng-if="$last && filtered.length != 1">
+        <span class="col-xs-6">
+          <div class="pull-right">
+            <a href ='#' class="btn btn-primary btn-lg q-button previous" ng-click="carepath.previous($index)">Indietro</a>
+          </div>
+         </span>
+         <span class="col-xs-6">
+           <div class="pull-left">
+            <button type="submit" class="btn btn-primary btn-lg q-button confirm" ng-click="carepath.confirm()">OK</button>
+          </div>
+        </span>
+      </div>
+      <div ng-if="!$first && !$last">
+        <span class="col-xs-6">
+          <div class="pull-right">
+            <a href ='#' class="btn btn-primary btn-lg q-button previous" ng-click="carepath.previous($index)">Indietro</a>
+          </div>
+         </span>
+         <span class="col-xs-6">
+           <div class="pull-left">
+            <a href ='#' class="btn btn-primary btn-lg q-button" ng-click="carepath.next($index)">Avanti</a>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="q-form-validator" ng-show="carepath.formError">Si è verificato un problema, ricontrolla le tue risposte.</div>

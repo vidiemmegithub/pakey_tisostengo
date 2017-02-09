@@ -1,0 +1,57 @@
+{
+  "carepaths": [
+    {
+      "title": "Reflusso gastroesofageo",
+      "description": "Reflusso gastroesofageo",
+      "tags": [
+        "gastroesofageo",
+        "reflusso"
+      ],
+      "steps": [
+        {
+          "title": "Trasporti",
+          "description": "Gli acidi del reflusso possono anche impattare la gola, la trachea, e portare a tosse mal di gola e altre manifestazioni da curare",
+          "specialists": [],
+          "specializations": [],
+          "question":
+          {
+            "text": "Hai tosse cronica o mal di gola?"
+          }
+        },
+        {
+          "title": "Gastroscopia",
+          "description": "Esame specialistico che aiuterà il gastroenterologo (se lo riterrà necessario) a identificare le cause del reflusso ed eventuali lesioni della prima parte dell’apparato digerente.",
+          "specialists": [],
+          "specializations": []
+        },
+        {
+          "title": "Lastra torace",
+          "description": "Viene consigliata come primo approccio diagnostico al fine di escludere patologie del parenchima polmonare",
+          "specialists": [],
+          "specializations": []
+        },
+        {
+            "title" : "Farmacia",
+            "description" : "Il luogo dove potrai trovare tutti i farmaci prescritti",
+            "specializations" : [],
+            "specialists" : []
+        },
+        {
+            "title" : "Visita cardiologica",
+            "description" : "Molti dei sintomi del reflusso possono confondersi con quelli di altre patologie, anche cardiologiche. Un check-up da uno specialista è utile per escludere la la loro presenza.",
+            "specializations" : [],
+            "specialists" : []
+        },
+        {
+            "title" : "Dieta",
+            "description" : "Il morbo celiaco necessita di avere ben chiaro cosa mangiare e cosa non, il consulto di un professionista è importante per trovare la giusta combinazione di alimenti.",
+            "question" : {
+                "text" : "Hai bisogno di un piano alimentare da seguire?"
+            },
+            "specializations" : [],
+            "specialists" : []
+        }
+      ]
+    }
+  ]
+}

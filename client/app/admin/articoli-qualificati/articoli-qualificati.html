@@ -1,0 +1,11 @@
+<h1>Articoli Utenti Qualificati</h1>
+<div class="row">
+  <div class="col-lg-12">
+		<search-bar model="articoli.searchText"></search-bar>
+  	<admin-articles articles="articoli.filteredArticles"
+                   published="true"
+                   editorial="false"
+           on-delete-article="articoli.delete(article)">
+    </admin-articles>
+  </div>
+</div>

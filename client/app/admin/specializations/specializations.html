@@ -1,0 +1,54 @@
+<div class="row">
+  <h1>SPECIALIZZAZIONI</h1>
+  <div class="pull-right">
+    <a ng-click="adminSpecializations.create()" class="btn btn-primary" role="button">
+      <i class="fa fa-plus text-success"></i> Aggiungi
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 space"></div>
+</div>
+<div class="row">
+  <form class="specializations_search_form">
+      <input type="text" class="col-xs-12 search_input" ng-model="adminSpecializations.searchString" ng-change="adminSpecializations.keysearch(adminSpecializations.searchString)" placeholder="Effettua una ricerca">
+  </form>
+  <div infinite-scroll="adminSpecializations.loadMore()" infinite-scroll-disabled="adminSpecializations.isLoading || adminSpecializations.noMore">
+    <div class="row">
+      <div class="col-xs-12 space"></div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-specializations">
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th class="text-center">Categoria</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="specialization in adminSpecializations.specializations">
+          <td class="text-left">{{specialization.name}}</td>
+          <td class="text-center vertical-align">{{specialization.category}}</td>
+          <td class="vertical-align">
+            <div role="group" style="display: flex; float: right;">
+              <a type="button"
+                 ng-click="adminSpecializations.update(specialization)"
+                 class="btn btn-primary btn-sm"
+                 uib-tooltip="Modifica">
+                <i class="fa fa-edit"></i>
+              </a>
+              <button type="button"
+                      class="btn btn-danger margin-left-10"
+                      uib-tooltip="Elimina"
+                      ng-click="adminSpecializations.remove(specialization)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

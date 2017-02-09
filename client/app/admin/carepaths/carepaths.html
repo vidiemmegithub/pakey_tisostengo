@@ -1,0 +1,55 @@
+<div class="row">
+  <h1>PERCORSI DI CURA</h1>
+  <div class="pull-right">
+    <a href="/admin/percorsi-cura/crea" class="btn btn-primary" role="button">
+      <i class="fa fa-plus text-success"></i> Aggiungi
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 space"></div>
+</div>
+<div class="row">
+  <form class="carepaths_search_form">
+      <input type="text" class="col-xs-8 col-md-9 col search_input" ng-model="adminCarepaths.searchString" ng-change="adminCarepaths.emptySearch(adminCarepaths.searchString)" placeholder="Effettua una ricerca">
+      <button type="submit" class="col-xs-3 col-md-2 btn btn-primary btn-lg search_button" ng-click="adminCarepaths.search(adminCarepaths.searchString)">Cerca</button>
+  </form>
+  <div class="panel-body" ng-if="adminCarepaths.carepaths.length == 0">
+    <p class="alert-subimportant">Non sono presenti percorsi di cura</p>
+  </div>
+  <div ng-if="adminCarepaths.carepaths.length != 0" infinite-scroll="adminCarepaths.loadMore()" infinite-scroll-disabled="adminCarepaths.isLoading || adminCarepaths.noMore">
+    <div class="row">
+      <div class="col-xs-12 space"></div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-carepaths">
+        <thead>
+        <tr>
+          <th>Titolo</th>
+          <th class="text-center">Data di creazione</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="carepath in adminCarepaths.carepaths" class="">
+          <td class="text-left">{{carepath.title}}</td>
+          <td class="text-center vertical-align">{{carepath.created_at | date:'dd-MM-yyyy'}}</td>
+          <td class="vertical-align">
+            <div role="group" style="display: flex">
+              <a href="/admin/percorsi-cura/{{carepath._id}}/modifica" uib-tooltip="Modifica" class="btn btn-primary" role="button">
+                <i class="fa fa-edit"></i>
+              </a>
+              <button type="button"
+                      class="btn btn-danger margin-left-10"
+                      uib-tooltip="Elimina"
+                      ng-click="adminCarepaths.remove(carepath._id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.address-confirmation-popup h3{
+  padding: 0 10px;
+}
+.address-confirmation-popup p{
+  padding: 0 10px;
+}
+.modal-header{
+  background: rgba(205,229,247,.4);
+}
+.address-suggestions{
+  margin-bottom: 0px;
+}
+.suggestions-container{
+  max-height: 560px;
+  overflow: auto;
+}
+.address-suggestions-i-0,
+.address-suggestions-i-1 {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+.address-suggestions-l-0,
+.address-suggestions-l-1 {
+  font-size: 18px;
+  background: #fff;
+  padding: 10px 10px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  vertical-align: middle;
+}
+.address-suggestions-l-0:hover,
+.address-suggestions-l-1:hover{
+  color: #adadad;
+}
+.address-suggestions-i-0:checked ~.address-suggestions-l-0,
+.address-suggestions-i-1:checked ~.address-suggestions-l-1 {
+  color: #3D9CCC;
+}

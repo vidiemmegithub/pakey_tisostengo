@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1 class="article-title">{{articolo.article.title}}</h1>
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+        	<p class="author">Scritto {{ articolo.article.editorial ? 'dalla Redazione - ' : 'da' }} {{articolo.article.author.title}} {{articolo.article.author.firstname}} {{articolo.article.author.lastname}}</p>
+        	<p class="date-specialization">{{ articolo.article.pub_date | date:'longDate' }} | Categoria: {{articolo.article.category}}</p>
+          <div class="thumbnail col-sm-6 col-xs-12">
+            <article-image article="articolo.article"
+                             width="430"
+                              size="'big'"
+                            method="'contain'">
+            </article-image>
+          </div>
+          <p ta-bind ng-model="articolo.article.text"></p>
+          <div class="clear"></div>
+          <p class="author">Scritto {{ articolo.article.editorial ? 'dalla Redazione - ' : 'da' }} {{articolo.article.author.title}} {{articolo.article.author.firstname}} {{articolo.article.author.lastname}}</p>
+          <br>
+          <div ng-if="articolo.article.editorial" class="fb-share-button" data-href="{{articolo.articleUrl}}" data-layout="button_count" data-action="share" data-show-faces="true" data-share="true"></div>
+
+          <h4 ng-if="articolo.article.editorial || articolo.isLoggedIn()" class="section-title">Tag</h4>
+          <tag-list ng-if="articolo.article.editorial || articolo.isLoggedIn()" tags="articolo.article.tags"></tag-list>
+          <segnala-abuso type='articolo' id='{{articolo.article._id}}'></segnala-abuso>
+          <comments ng-if="articolo.isLoggedIn()" article="articolo.article"></comments>
+      		<div class="panel-loggati" ng-hide="articolo.isLoggedIn()">
+      		  <i class="fa fa-smile-o fa-4x"></i>
+      		  <p class="alert-important">Accedi per leggere e commentare l'articolo completo</p>
+      		  <button type="button" class="btn btn-default btn-lg" show-login>ACCEDI</button>
+      		  <p class="alert-subimportant">Non hai un account? Registrati ora! Le tue informazioni saranno trattate con la massima riservatezza</p>
+        	</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary" ng-if="articolo.isSelf()">
+        <div class="panel-body text-center">
+          <a type="button" class="btn btn-primary btn-s" ng-href="/scrivi-articolo/{{articolo.article._id}}">MODIFICA o CANCELLA</a>
+        </div>
+      </div>
+      <div class="panel panel-info admin-action" ng-if="articolo.isAdmin()">
+        <div class="panel-body text-center">
+          <p><a type="button"
+               class="btn btn-success btn-s"
+               ng-if="!articolo.article.pub_date && articolo.article.editorial"
+            ng-click="articolo.publishArticle()">
+              <i class="fa fa-check"></i> PUBBLICA
+          </a></p>
+          <p><a type="button"
+               class="btn btn-warning btn-s"
+               ng-if="articolo.article.pub_date && articolo.article.editorial"
+            ng-click="articolo.unpublishArticle()">
+              <i class="fa fa-eye-slash"></i></i> DEPUBBLICA
+          </a></p>
+          <p><a type="button"
+               class="btn btn-danger btn-s"
+            ng-click="articolo.deleteArticle()">
+              <i class="fa fa-trash"></i> ELIMINA
+          </a></p>
+        </div>
+      </div>
+      <qualified-detail professionista='articolo.article.author'></qualified-detail>
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>{{articolo.article.editorial ? 'Articoli redazionali simili' : 'Articoli simili'}}</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="articolo.simili.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <article-box article='simili' ng-repeat="simili in articolo.simili | limitTo:5"></article-box>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

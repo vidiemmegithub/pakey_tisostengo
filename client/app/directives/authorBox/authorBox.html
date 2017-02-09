@@ -1,0 +1,7 @@
+<div class="media well">
+  <h3 class="media-heading">Domanda di {{author.title}} {{author.firstname}} {{author.lastname}}</h3>
+  <p class="author">{{author.city}}</p>
+  <p class="author" ng-show="author.dateOfBirth"> {{ author.dateOfBirth | age }} anni</p>
+  <p class="author" ng-show="author.gender"><i class="fa fa-venus-mars"></i> {{ author.gender | gender }}</p>
+  <a type="button" class="btn btn-primary btn-s" ng-if='questionId' ng-href="/rispondi/{{questionId}}">RISPONDI</a>
+</div>

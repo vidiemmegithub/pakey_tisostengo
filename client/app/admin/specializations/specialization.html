@@ -1,0 +1,28 @@
+<div class="specialization-popup">
+  <div class="modal-header">
+    <h3 class="modal-title">SPECIALIZZAZIONE</h3>
+  </div>
+  <div class="modal-body">
+    <form name="specializationForm" novalidate>
+      <div class="form-group">
+        <h3>Nome *</h3>
+        <input class="form-control" ng-model="specialization.name" name="specializationName" ng-disabled="!new" bs-has-error required>
+      </div>
+      <div class="form-group">
+        <h3>Categoria *</h3>
+        <select ng-model="specialization.category">
+        <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <h3>Nuova categoria</h3>
+        <input class="form-control" ng-model="specialization.newCategory" name="specializationCategory">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+    <button class="btn btn-primary" type="button" ng-disabled="specializationForm.$invalid || (!specialization.newCategory && !specialization.category)" ng-click="$close()">Procedi</button>
+  </div>
+</div>
+

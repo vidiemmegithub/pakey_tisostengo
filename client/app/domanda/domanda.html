@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Il Professionista risponde</h1>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 question-content">
+        	<p class="author">Risponde {{domanda.question.target_user.title}} {{domanda.question.target_user.firstname}} {{domanda.question.target_user.lastname}}</p>
+        	<p class="date-specialization">{{ domanda.question.pub_date | date:'longDate' }} | Categoria: {{domanda.question.category}}</p>
+		      <p class="private-channel" ng-show="domanda.question.type === 'private'" style=""><i class="fa fa-key"></i> Domanda privata</p>
+		      <h4 class="question-main">{{domanda.question.text}}</h4>
+        	<div ng-if="domanda.isLoggedIn() && domanda.question.answer">
+	          <p class="question-answer">{{domanda.question.answer.text}}</p>
+            <div ng-if="domanda.question.attachments.length > 0 && domanda.question.target_user._id == domanda.getCurrentUser()._id">
+              <h4 class="section-title">Allegati</h4>
+              <a ng-repeat="attachment in domanda.question.attachments" type="button" class="btn btn-default btn-s" target="_blank" download="{{attachment.name}}" ng-href="{{attachment.location}}">{{attachment.name}}</a>
+            </div>
+            <h4 class="section-title">Tag</h4>
+	          <tag-list tags="domanda.question.tags"></tag-list>
+          </div>
+          <segnala-abuso type='domanda' id='{{domanda.question._id}}'></segnala-abuso>
+          <div ng-if="domanda.isLoggedIn()">
+	          <comments question="domanda.question"></comments>
+        	</div>
+        	<div class="panel-loggati" ng-hide="domanda.isLoggedIn()">
+		        <i class="fa fa-smile-o fa-4x"></i>
+		        <p class="alert-important">Accedi per leggere la risposta</p>
+		        <button type="button" class="btn btn-default btn-lg" show-login>ACCEDI</button>
+		        <p>Non hai un account? Registrati ora! Le tue informazioni saranno trattate con la massima riservatezza</p>
+        	</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-info admin-action" ng-if="domanda.isAdmin()">
+        <div class="panel-body text-center">
+          <p><a type="button" class="btn btn-danger btn-s" ng-click="domanda.deleteQuestion()"><i class="fa fa-trash"></i></button> ELIMINA</a></p>
+        </div>
+      </div>
+      <author-box author="domanda.question.author" ng-if="domanda.question.target_user._id == domanda.getCurrentUser()._id"></author-box>
+      <qualified-detail professionista='domanda.question.target_user'></qualified-detail>
+      <advertisement></advertisement>
+      <div ng-show="domanda.isLoggedIn()">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>I Professionisti rispondono</strong>
+          </div>
+        </div>
+        <div class="panel-body" ng-if="domanda.questions.length <= 0">
+          <p class="alert-subimportant">Non sono presenti domande</p>
+        </div>
+        <question-box question='question' ng-repeat="question in domanda.questions | limitTo:5"></question-box>
+      </div>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

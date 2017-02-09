@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+	<p><strong>Data di invio:</strong> {{message.pub_date | date}}<p/>
+	<p><strong>Mittente:</strong> {{message.firstname}} {{message.lastname}}</p>
+	<p><strong>Email:</strong> <a href="mailto:{{message.email}}?subject=Risposta da tiSOStengo.it&body=%0A%0A%0A%0A---------------%0A%0AMessaggio originale%0A%0AData di invio: {{message.pub_date | date}}%0A%0AMittente: {{message.firstname}} {{message.lastname}}%0A%0AMessaggio: {{message.text}}" target="_blank">{{message.email}}</a></p>
+	<p><strong>Pagina segnalata:</strong> {{message.url}}</p>
+	<p><strong>Testo del messaggio:</strong> {{message.text}}</p>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-default" type="button" ng-click="$dismiss()">Chiudi</button>
+	<a ng-if="message"
+           type="button"
+           class="btn btn-sm btn-primary"
+           ng-href="mailto:{{message.email}}?subject=Risposta da tiSOStengo.it&body=%0A%0A%0A%0A---------------%0A%0AMessaggio originale%0A%0AData di invio: {{message.pub_date | date}}%0A%0AMittente: {{message.firstname}} {{message.lastname}}%0A%0AMessaggio: {{message.text}}"
+           target="_blank">
+          <i class="fa fa-reply"></i> RISPONDI VIA E-MAIL
+  </a>
+	<button ng-if="message.status !== 'resolved'" class="btn btn-success" type="button" ng-click="$close()"><i class="fa fa-check"></i> Segnala come risolto</button>
+</div>

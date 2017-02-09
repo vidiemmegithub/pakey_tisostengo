@@ -1,0 +1,139 @@
+<h1>Coupon</h1>
+<div class="pull-right">
+  <button type="button" class="btn btn-primary" ng-click="coupon.createCoupon()">
+    <i class="fa fa-plus text-success"></i> Crea coupon
+  </button>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="row">
+      <h3>Cerca</h3>
+      <div class="form-group col-md-6">
+        <label for="searchCode">Codice Coupon</label>
+        <input ng-model="coupon.searchCode" type="text" class="form-control" id="searchCode">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="searchSconto">Valore del coupon</label>
+        <input id="searchSconto" name="searchSconto" type="text" class="form-control" ng-model="coupon.searchSconto" ui-money-mask/>
+      </div>
+      <div class="col-md-6">
+        <label for="coupon-code">Valido il giorno</label>
+        <p class="input-group" style="margin-top:0;">
+          <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="coupon.searchDate" is-open="coupon.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="Valido il giorno" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="coupon.openSearchCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="professionist-name">Servizio associato</label>
+        <select class="form-control" 
+                id="service"
+                ng-model="coupon.searchService"
+                ng-options="service.name as service.value for service in coupon.services">
+                <option value="">TUTTI I SERVIZI</option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <!--<search-bar model="coupon.searchText"></search-bar>-->
+    <uib-tabset justified="true">
+      <uib-tab heading="Validi">
+        <admin-coupon coupons="coupon.filteredCoupons"
+                      editable="true"
+                      custom-filter='coupon.isValid(thisCoupon)'
+                      on-delete-coupon="coupon.deleteCoupon(couponID)">
+        </admin-coupon>
+      </uib-tab>
+      <uib-tab heading="Scaduti">
+        <admin-coupon coupons="coupon.filteredCoupons"
+                      custom-filter="coupon.isExpired(thisCoupon)"
+                      on-delete-coupon="coupon.deleteCoupon(couponID)">
+        </admin-coupon>
+      </uib-tab>
+      <uib-tab heading="Cancellati">
+        <admin-coupon coupons="coupon.filteredCoupons"
+                      custom-filter="coupon.isDisabled(thisCoupon)"
+                      on-delete-coupon="coupon.deleteCoupon(couponID)">
+        </admin-coupon>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+</div>
+
+<script type="text/ng-template" id="createCoupon.html">
+  <h1 class="modal-title text-center">Crea Coupon</h1>
+  <div class="row">
+    <div class="modal-body col-md-8 col-md-offset-2">
+      <form class="form" name="form" ng-submit="create(form)" novalidate>
+        <!--<div class="form-group">
+          <label>Braintree Coupon ID</label>
+          <input type="text" name="inheritedFromId" class="form-control" ng-model="coupon.inheritedFromId"
+                 required autofocus bs-has-error>
+        </div>-->
+        <div class="form-group">
+          <label for="cap">Servizio Associato *</label>
+          <select class="form-control" 
+                  id="service"
+                  ng-model="coupon.service"
+                  ng-change="coupon.findMaxValue(coupon.service)"
+                  ng-init="coupon.findMaxValue(coupon.service)"
+                  ng-options="service.name as service.value for service in services">
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Attivabile fino al *</label>
+          <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="coupon.validity" is-open="calendar.opened" min-date="minDate" ng-required="true" close-text="Chiudi" alt-input-formats="Valido fino al" required bs-has-error/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+        <label>Validità *</label>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="neverExpires" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" ng-model="coupon.neverExpires"
+                 ng-true-value="true"
+                 ng-false-value="false"
+                 bs-has-error> 
+                <b>Senza fine </b>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>oppure Numero di mesi di applicabilità</label>
+          <input id="validita" name="validita" ng-disabled="coupon.neverExpires" type="number" min="1" step="1" name="numberOfBillingCycles" class="form-control" ng-model="coupon.numberOfBillingCycles"
+                 ng-required="!coupon.neverExpires"
+                 autofocus bs-has-error>
+        </div>
+        <div class="form-group">
+          <label>Valore dello sconto *</label>
+          <input id="sconto" name="sconto" type="text" class="form-control" name="field" ng-model="coupon.amount" ui-money-mask min="0.01" max="coupon.maxValue"
+                 required bs-has-error/>
+        </div>
+    
+        <div>
+          * Tutti i campi sono obbligatori
+        </div>
+        <div ng-messages="form.validita.$error">
+            <p class="text-danger small" ng-message="required">La validità è obbligatoria</p>
+        </div>
+        <div ng-messages="form.sconto.$error">
+            <p class="text-danger small" ng-message="min">Il valore di sconto deve essere maggiore di 0</p>
+            <p class="text-danger small" ng-message="max">Il valore di sconto supera il prezzo del servizio</p>
+        </div>
+        <div class="form-group has-error">
+          <p class="help-block small">{{ errors.other }}</p>
+        </div>
+    
+        <div class="text-center">
+          <button class="btn btn-lg btn-primary" ng-disabled="form.$invalid" type="submit">
+            Crea coupon
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>

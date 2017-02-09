@@ -1,0 +1,93 @@
+.container-btn-add{
+    margin: 0;
+    display: table;
+    width: 100%;
+}
+
+.dnd-ul ul[dnd-list],
+.dnd-ul ul[dnd-list] > li {
+  position: relative;
+}
+
+.dnd-ul ul[dnd-list] {
+  min-height: 42px;
+  padding: 25px 10px;
+}
+
+.dnd-ul ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+.dnd-ul ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 42px;
+}
+
+.dnd-ul ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 15px 10px;
+    margin: 0px -10px;
+}
+
+.dnd-ul ul[dnd-list] li.selected {
+}
+
+.carepath-step-popup h3{
+  padding: 0 10px;
+}
+.carepath-step-popup p{
+  padding: 0 10px;
+}
+.carepath-step-popup .modal-header{
+  background: rgba(205,229,247,.4);
+}
+.carepath-step-popup textarea {
+  min-height: 100px;
+  height: auto;
+}
+
+
+.carepath-step-popup .address-search{
+  height: 50px;
+}
+.carepath-step-popup .address-search-input{
+  border: rgb(204, 230, 247) 2px solid;
+  border-radius: 5px !important;
+  background-color: rgb(255, 255, 255);
+  height: 45px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+.carepath-step-popup .address-search-button {
+  border-radius: 5px !important;
+  height: 45px;
+}
+.carepath-step-popup .suggestions-container{
+  max-height: 560px;
+  overflow: auto;
+}
+.carepath-step-popup .address-suggestions-i{
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+.carepath-step-popup .address-suggestions-l {
+  font-size: 18px;
+  background: #fff;
+  padding: 10px 10px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  vertical-align: middle;
+}
+.carepath-step-popup .address-suggestions-l:hover{
+  color: #adadad;
+}
+.carepath-step-popup .address-suggestions-i:checked ~.address-suggestions-l{
+  color: #3D9CCC;
+}

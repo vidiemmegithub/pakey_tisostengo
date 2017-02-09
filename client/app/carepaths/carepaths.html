@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <h1>Come possiamo aiutarti oggi?</h1>
+      <form class="carepaths_search_form">
+          <input type="text" class="col-xs-8 col-md-9 search_input" ng-model="carepaths.searchString" ng-change="carepaths.emptySearch(carepaths.searchString)" placeholder="Effettua una ricerca">
+          <button type="submit" class="col-xs-3 col-md-2 btn btn-primary btn-lg search_button" ng-click="carepaths.search(carepaths.searchString)">Cerca</button>
+      </form>
+      <div class="panel-body" ng-if="carepaths.carepaths.length == 0">
+        <p class="alert-subimportant">Non sono presenti percorsi di cura</p>
+      </div>
+      <div infinite-scroll="carepaths.loadMore()" infinite-scroll-disabled="carepaths.isLoading || carepaths.noMore">
+        <div class="box-carepath" ng-repeat="carepath in carepaths.carepaths">
+          <a href="percorsiCura/{{carepath._id}}">
+            <h4>{{ carepath.title | ellipsis:55 }}</h4>
+            <p>{{ carepath.description | ellipsis:290 }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>Articoli dei professionisti</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="carepaths.articles.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <article-box article='article' ng-repeat="article in carepaths.articles | limitTo:4"></article-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I TAG più usati</strong>
+        </div>
+      </div>
+      <tag-list tags='tags' limit='15'></tag-list>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

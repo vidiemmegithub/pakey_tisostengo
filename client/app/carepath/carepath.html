@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="carepath">
+    <div ng-if="!carepath.isQuestionnaireEnded" ng-include="'app/carepath/carepath.questionnaire.html'" class="col-xs-12 col-md-9"></div>
+    <div ng-if="carepath.isQuestionnaireEnded" ng-include="'app/carepath/carepath.map.html'"></div>
+    <div ng-if="!carepath.isQuestionnaireEnded" class="col-xs-12 col-md-3">
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>Articoli dei professionisti</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="carepath.articles.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <article-box article='article' ng-repeat="article in carepath.articles | limitTo:4"></article-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I TAG più usati</strong>
+        </div>
+      </div>
+      <tag-list tags='tags' limit='15'></tag-list>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

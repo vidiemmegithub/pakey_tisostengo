@@ -1,0 +1,9 @@
+.admin-article-list td:first-of-type{
+	width:40%;
+}
+.admin-article-list td:nth-of-type(2){
+    width: 17%;
+}
+.admin-article-list button{
+	margin-bottom: 10px;
+}

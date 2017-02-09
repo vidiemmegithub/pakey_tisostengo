@@ -1,0 +1,7 @@
+.space{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+ .table-specializations > tbody > tr > td.vertical-align{
+    vertical-align: middle;
+}

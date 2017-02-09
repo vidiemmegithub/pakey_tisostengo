@@ -1,0 +1,85 @@
+<footer ng-controller="FooterCtrl">
+  <div class="footer">
+    <div class="container secondary-menu">
+      <div class="row">
+        <div class="col-lg-3">
+          <h5>Informazioni</h5>
+          <ul class="footer-list">
+            <li><a href="/chi-siamo">Chi siamo</a></li>
+            <li><a href="/termini-condizioni">Termini e condizioni</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/cookie">Informativa Cookie</a></li>
+            <li><a href="/contatta">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <h5>Contenuti</h5>
+          <ul class="footer-list">
+            <li><a href="/professionisti">Professionisti</a></li>
+            <li><a href="/articoli">Articoli</a></li>
+            <li><a href="/domande">Domande e risposte</a></li>
+            <li><a href="/tags">Tag</a></li>
+            <li><a href="/servizi-premium">Servizi premium</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <h5 ng-show="isQualified() || isUnqualified()">Utente</h5>
+          <ul class="footer-list">
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/home">La mia home</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/main">Testata editoriale</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/profilo">Profilo</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isEditor()">
+              <a href="/miei-articoli">I miei articoli</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isEditor()">
+              <a href="/scrivi-articolo">Scrivi un articolo</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <ul class="footer-list">
+            <li role="menuitem" ng-show="isQualified()">
+              <a href="/domande-in-arrivo">Domande in arrivo</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/mie-domande">Le mie domande</a>
+            </li>
+               <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/professionisti">Fai una domanda</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/miei-commenti">I miei commenti</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/professionisti-seguiti">Professionisti seguiti</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()">
+              <a href="/contatta">Contatta tiSOStengo</a>
+            </li>
+            <li role="menuitem" ng-show="isQualified() || isUnqualified()">
+              <a href="/servizi-premium">Servizi Premium</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer copyright">
+    <div class="container">
+      <div class="panel-body">
+        <p class="pull-left"><a href="/"><img src="/assets/images/logo_short.png" alt="tiSOStengo"></a>TiSOStengo – Testata giornalistica registrata al Tribunale di Milano, n. 54 del 23/1/2017 | Direttore responsabile: Antonio Piemontese | © Editore paKey srl</br>Copyright 2016 - Tutti i diritti riservati - paKey srl P. IVA 09193820967 - Via Amadeo 57, 20134 Milano. Tel 02 21116309 - <a href="mailto:info@tisostengo.it" target="_blank">info@tisostengo.it</a></p>
+        <p class="pull-right">
+          <a href="https://www.linkedin.com/company/tisostengo-it?trk=nav_account_sub_nav_company_admin" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+          <a href="https://twitter.com/tiSOStengo_it" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+          <a href="https://www.facebook.com/Tisostengoit-232010107138073/?ref=hl" target="_blank"><i class="fa fa-facebook-square fa-3x"></i></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

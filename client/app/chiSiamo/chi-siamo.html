@@ -1,0 +1,71 @@
+<div class="container chi-siamo">
+	<div class="row">
+    <div class="col-md-9">
+      <h1>Chi siamo</h1>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 nopadding">
+          <img src="/assets/images/chisiamo/chisiamo1.jpg" alt="Vogliamo condividere la nostra visione per un mondo della salute migliore" class="img-responsive">
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <h3>Vogliamo condividere la nostra visione per un mondo della salute migliore</h3>
+          <p>
+              Vogliamo abbattere le distanze e le barriere di comunicazione in un mondo tanto complesso come quello della salute. <br>
+              Tante realtà in campo e così poca organizzazione comportano uno spreco di risorse pubbliche e private e limitano le possibilità di scelta nel momento del bisogno a ciò che è più facilmente reperibile tramite canali locali non verificabili.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-md-push-6 nopadding">
+          <img src="/assets/images/chisiamo/chisiamo2.jpg" alt="Vogliamo che la tecnologia sia un aiuto, non un ostacolo" class="img-responsive">
+        </div>
+        <div class="col-sm-12 col-md-6 col-md-pull-6">
+          <h3>Vogliamo che la tecnologia sia un aiuto, non un ostacolo</h3>
+          <p>
+              Vogliamo un mondo in cui tra richiesta di aiuto e offerta ci sia soltanto una semplice ricerca online che tutti possono saper fare. 
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 nopadding">
+          <img src="/assets/images/chisiamo/chisiamo3.jpg" alt="Vogliamo avvicinare i professionisti dellÕhealthcare e le persone" class="img-responsive">
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <h3>Vogliamo avvicinare i professionisti dell'healthcare e le persone</h3>
+          <p>
+              Vogliamo essere la soluzione fornendo un servizio in grado di avvicinare professionisti, le strutture e più in generale tutti gli attori della galassia dell'healthcare.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-md-push-6 nopadding">
+          <img src="/assets/images/chisiamo/chisiamo4.jpg" alt="Vogliamo divulgare informazioni qualificate" class="img-responsive">
+        </div>
+        <div class="col-sm-12 col-md-6 col-md-pull-6">
+          <h3>Vogliamo divulgare informazioni qualificate</h3>
+          <p>
+              Vogliamo che attraverso la produzione di un network da parte dei professionisti si vengano a creare anche contenuti qualificati che agevolino le scelte decisionali degli utenti "non qualificati" iscritti alla piattaforma. 
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 box-dark">
+          <h3>Vogliamo essere la soluzione.</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <professionista-iscriviti>Condividi la nostra visione?</professionista-iscriviti>
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>Articoli dei più seguiti</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="chiSiamo.articles.length <= 0">
+        <p class="alert-subimportant">Non sono presenti articoli</p>
+      </div>
+      <article-box article='article' ng-repeat="article in chiSiamo.articles | limitTo:4"></article-box>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

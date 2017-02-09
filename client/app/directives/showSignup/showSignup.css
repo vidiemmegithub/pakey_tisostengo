@@ -1,0 +1,27 @@
+.feature-list {
+  cursor: pointer;
+}
+.registration .well{
+  background: #FAFAFA;
+}
+.registration .well:hover{
+  background: #F0F0F0;
+}
+.registration .fa-ul{
+  margin-left: 25px;
+}
+.registration  .fa:not(.fa-check){
+  font-size: 100px;
+  color: #fff;
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.registration .fa-user{
+  background: #FBD020;
+}
+.registration .fa-user-md{
+ background: #86B9E3; 
+}

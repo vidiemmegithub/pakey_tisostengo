@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <h1>I miei articoli</h1>
+          <div class="panel-body" ng-if="mieiArticoli.articles.length <= 0">
+            <p class="alert-important">Non sono presenti articoli</p>
+          </div>
+	  			<div class="row"
+	       		infinite-scroll="mieiArticoli.loadMoreArticles()"
+	       		infinite-scroll-disabled="mieiArticoli.isLoadingArticles || mieiArticoli.noMoreArticles">
+	    			<div class="col-sm-12 col-md-6" ng-repeat="article in mieiArticoli.articles">
+              <my-article-preview article='article'></my-article-preview>
+	    			</div>
+	  			</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    	<div class="panel panel-primary">
+  			<div class="panel-body text-center">
+    			<a type="button" class="btn btn-default btn-yellow" href="/scrivi-articolo">Scrivi un articolo</a>
+  			</div>
+			</div>
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I miei TAG più usati</strong>
+        </div>
+      </div>
+      <tag-list tags='mieiArticoli.tags' limit='15'></tag-list>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

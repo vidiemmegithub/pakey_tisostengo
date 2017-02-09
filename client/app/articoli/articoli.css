@@ -1,0 +1,6 @@
+.box-articles.articles-list{
+    min-height: 470px;
+}
+.col-md-6 .box-articles {
+    min-height: 500px;
+}

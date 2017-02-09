@@ -1,0 +1,8 @@
+<a ng-href="{{ comment.elType ===  'question' ? 'domanda/' : 'articolo/'}}{{comment._id}}" 
+	ng-class="comment.elType ===  'question' ? 'questions' : 'articles'">
+	<div class="well">
+		<h4>{{comment.title}}</h4>
+		<p class="author">{{comment.user.title}} {{comment.user.firstname}} {{comment.user.lastname}}</p>
+		<p class="date-specialization">{{ comment.pub_date | date:'longDate' }}</p>
+	</div>
+</a>

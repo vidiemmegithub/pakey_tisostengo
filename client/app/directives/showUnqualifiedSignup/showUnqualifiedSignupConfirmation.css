@@ -1,0 +1,20 @@
+.unqualified-signup-confirmation p{
+  font-size:18px;
+  color: #86B9E3;
+  text-align: center;
+}
+.unqualified-signup-confirmation i{
+  font-size: 70px;
+}
+.unqualified-signup-confirmation i.fa-check{
+  color: #7ED321;
+}
+.unqualified-signup-confirmation i.fa-times{
+  color: #D0021B;
+}
+.unqualified-signup-confirmation i.fa-question{
+  color: #FFB319;
+}
+.unqualified-signup-confirmation button:not(:first-of-type) {
+  margin-left: 20px;
+}

@@ -1,0 +1,30 @@
+<div class="carepath-step-popup">
+  <div class="modal-header">
+    <h3 class="modal-title">STEP</h3>
+  </div>
+  <div class="modal-body">
+    <form name="carepathStepForm" novalidate>
+      <div class="form-group">
+        <h3>Titolo *</h3>
+        <input class="form-control" ng-model="step.title" name="carepathStepTitle" bs-has-error required>
+      </div>
+      <div class="form-group">
+        <h3>Descrizione *</h3>
+        <textarea class="form-control" name="text" ng-model="step.description" name="carepathStepDescription" bs-has-error required></textarea>
+      </div>
+      <div class="form-group">
+        <h3>Domanda</h3>
+        <textarea class="form-control" name="text" ng-model="step.question.text" name="carepathStepQuestion"></textarea>
+      </div>
+      <div class="form-group">
+        <h3>Specializzazioni *</h3>
+        <div search-filter="specializationsDropdown.filter" options="specializationsDropdown.list" selected-model="step.specializations" extra-settings="specializationsDropdown.settings" group-by="type" events="specializationsDropdown.events" ng-dropdown-multiselect></div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+    <button class="btn btn-primary" type="button" ng-disabled="carepathStepForm.$invalid" ng-click="$close()">Procedi</button>
+  </div>
+</div>
+

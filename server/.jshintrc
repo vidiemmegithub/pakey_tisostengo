@@ -1,0 +1,14 @@
+{
+  "node": true,
+  "bitwise": true,
+  "eqeqeq": true,
+  "latedef": "nofunc",
+  "noarg": true,
+  "undef": true,
+  "asi": true,
+  "debug": true,
+  "unused": true,
+  "curly": true,
+  "sub": true,
+  "esnext": true
+}

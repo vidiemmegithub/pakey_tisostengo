@@ -1,0 +1,6 @@
+<a ng-if='isLoggedIn()' ng-hide="isSelf() || isAdmin()" type="button"
+     class="btn btn-primary btn-s"
+     ng-href="/professionista/{{userId}}/fai-una-domanda">FAI UNA DOMANDA</a>
+<a ng-if='!isLoggedIn()' type="button"
+     class="btn btn-primary btn-s"
+     show-login>FAI UNA DOMANDA</a>

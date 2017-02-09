@@ -1,0 +1,9 @@
+.admin-messages-list td:first-of-type {
+	width:40%;
+}
+.admin-messages-list button, .admin-messages-list a {
+	margin-bottom: 10px;
+}
+.admin-messages-list td:nth-of-type(2) {
+    width: 17%;
+}

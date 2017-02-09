@@ -1,0 +1,130 @@
+<div ng-controller="NavbarCtrl">
+  <div class="navbar navbar-static-top navbar-primary">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand"><img src="/assets/images/logo.png" alt="tiSOStengo Logo" class="img-responsive logo"></a>
+      </div>
+      <div uib-collapse="isCollapsed" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right" role="search">
+          <div class="form-group clearfix">
+            <input type="search" class="form-control input-lg" ng-model='text' placeholder="Cerca...">
+
+            <button ng-if="isContenuti || isLoggedIn()" type="submit" class="btn btn-primary btn-lg" ng-click="search(text)">Cerca</button>
+            <button ng-if="!isContenuti && !isLoggedIn()" type="submit" class="btn btn-primary btn-lg" show-login>Cerca</button>
+          </div>
+          <div class="radio clearfix">
+            <label>
+              <input type="radio" name="option" ng-model="isContenuti" ng-value="true" value="true" ng-checked='isContenuti'>
+              Tra i contenuti
+            </label>
+            <label>
+              <input type="radio" name="option" ng-model="isContenuti" ng-value="false" value="false">
+              Tra i professionisti
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div uib-collapse="isCollapsed" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav main-nav">
+          <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}">{{item.title}}</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right secondary-nav">
+          <li ng-hide="isLoggedIn()">
+            <a class="login-register-button" href>
+              <button type="button" class="btn btn-default btn-lg" show-login>
+                Accedi
+              </button>
+            </a>
+          </li>
+          <li ng-hide="isLoggedIn()">
+            <a class="login-register-button" href>
+              <button type="button"
+                      class="btn btn-default btn-yellow btn-lg"
+                      show-signup>
+                Registrati
+              </button>
+              </a>
+          </li>
+          <li ng-show="isLoggedIn()">
+            <div class="btn-group" uib-dropdown>
+              <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>
+                <user-image class=""
+                            user="getCurrentUser()"
+                            width="65"
+                            height="45"
+                            size="'small'"
+                            method="'cover'">
+                </user-image>
+                Ciao, {{ getCurrentUser().firstname }} <i class="fa fa-caret-down"></i>
+              </button>
+              <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                <li role="menuitem" ng-show="isAdmin()" ng-class="{ active: isActive('/admin') }">
+                  <a href="/admin">Amministrazione</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/home') }">
+                  <a href="/home">La mia home</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/main') }">
+                  <a href="/main">Testata editoriale</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/profilo') }">
+                  <a href="/profilo">Profilo</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isEditor()" ng-class="{ active: isActive('/miei-articoli')} ">
+                  <a href="/miei-articoli">I miei articoli</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isEditor()" ng-class="{ active: isActive('/scrivi-articolo')} ">
+                  <a href="/scrivi-articolo">Scrivi un articolo</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified()" ng-class="{ active: isActive('/domande-in-arrivo') }">
+                  <a href="/domande-in-arrivo">Domande in arrivo</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/mie-domande') }">
+                  <a href="/mie-domande">Le mie domande</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/professionisti') }">
+                  <a href="/professionisti">Fai una domanda</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/miei-commenti') }">
+                  <a href="/miei-commenti">I miei commenti</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/professionisti-seguiti') }">
+                  <a href="/professionisti-seguiti">Professionisti seguiti</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified() || isEditor()" ng-class="{ active: isActive('/contatta') }">
+                  <a href="/contatta">Contatta tiSOStengo</a>
+                </li>
+                <li role="menuitem" ng-show="isQualified() || isUnqualified()" ng-class="{ active: isActive('/premium') }">
+                  <a href="/servizi-premium">Servizi Premium</a>
+                </li>
+                <li role="menuitem">
+                  <a href ng-click="logout()">Esci</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

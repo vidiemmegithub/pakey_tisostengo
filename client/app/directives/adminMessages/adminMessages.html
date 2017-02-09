@@ -1,0 +1,36 @@
+<table class="table admin-messages-list">
+  <thead>
+  <tr>
+    <th>Testo</th>
+    <th>Mittente</th>
+    <th>Data</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="message in messages | filter:filter">
+    <td><a ng-click="showDetail(message)">{{message.text | ellipsis:150}}</a></td>
+    <td>{{message.firstname}} {{message.lastname}}</td>
+    <td>{{message.pub_date | date }}</td>
+    <td>
+      <div role="group">
+        <button ng-if="message.status === 'pending'"
+                type="button"
+                class="btn btn-success btn-sm"
+                uib-tooltip="Segna come risolto"
+                ng-click="onResolveMessage({ message: message })">
+          <i class="fa fa-check"></i> Segna come risolto
+        </button>
+        <a ng-if="message"
+           type="button"
+           class="btn btn-sm btn-primary"
+           uib-tooltip="Rispondi via E-mail"
+           ng-href="mailto:{{message.email}}?subject=Risposta da tiSOStengo.it&body=%0A%0A%0A%0A---------------%0A%0AMessaggio originale%0A%0AData di invio: {{message.pub_date | date}}%0A%0AMittente: {{message.firstname}} {{message.lastname}}%0A%0AMessaggio: {{message.text}}"
+           target="_blank">
+          <i class="fa fa-reply"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

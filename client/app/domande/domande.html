@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">{{carepath.logga()}}
+    <div class="col-md-9">
+      <h1>Domande e Risposte</h1>
+      <nav class="navbar navbar-info filters">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <p class="navbar-text">Filtri</p>
+            </ul>
+            <form class="navbar-form navbar-left">
+              <categories-dropdown ng-model="domande.filters.category"></categories-dropdown>
+              <!--<cities-dropdown ng-model="domande.filters.city"></cities-dropdown>-->
+            </form>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+      <div class="panel-body" ng-if="domande.questions.length <= 0">
+        <p class="alert-subimportant">Non sono presenti domande</p>
+      </div>
+      <div class="row" infinite-scroll="domande.loadMoreQuestions()"
+           infinite-scroll-disabled="domande.isLoadingQuestions || domande.noMoreQuestions">
+        <ul class="media-list">
+          <question-preview questions='domande.questions'></question-preview>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I Professionisti rispondono</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="domande.followed.length <= 0">
+        <p class="alert-subimportant">Non sono presenti domande</p>
+      </div>
+      <question-box question='question' ng-repeat="question in domande.followed | limitTo:4"></question-box>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I più richiesti</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="domande.professionisti.length <= 0">
+        <p class="alert-subimportant">Non sono presenti professionisti</p>
+      </div>
+      <qualified-box professionista="professionista" ng-repeat="professionista in domande.professionisti | limitTo:4"></qualified-box>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

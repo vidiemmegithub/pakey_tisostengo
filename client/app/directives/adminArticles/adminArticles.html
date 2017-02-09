@@ -1,0 +1,43 @@
+<table class="table admin-article-list">
+  <thead>
+  <tr>
+    <th>Titolo</th>
+    <th>Autore</th>
+    <th ng-if="editorial">Data creazione</th>
+    <th ng-if="published">Data pubblicazione</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="article in articles | filter:filter">
+    <td><a href="/articolo/{{article._id}}">{{article.title}}</a></td>
+    <td><a href="/professionista/{{article.author._id}}">{{article.author.firstname}} {{article.author.lastname}}</a></td>
+    <td ng-if="editorial">{{article.creation_date | date }}</td>
+    <td ng-if="published">{{article.pub_date | date }}</td>
+    <td>
+      <div role="group">
+        <button ng-if="!article.pub_date && article.editorial"
+                type="button"
+                class="btn btn-success btn-sm"
+                uib-tooltip="Pubblica articolo"
+                ng-click="onPublishArticle({ article: article })">
+          <i class="fa fa-check"></i>
+        </button>
+        <button ng-if="article.pub_date && article.editorial"
+                type="button"
+                class="btn btn-sm btn-warning"
+                uib-tooltip="Depubblica articolo"
+                ng-click="onUnpublishArticle({ article: article })">
+          <i class="fa fa-eye-slash"></i>
+        </button>
+        <button type="button"
+                class="btn btn-sm btn-danger"
+                uib-tooltip="Elimina articolo"
+                ng-click="onDeleteArticle({ article: article })">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

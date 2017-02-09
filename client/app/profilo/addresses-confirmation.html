@@ -1,0 +1,24 @@
+<div class="address-confirmation-popup">
+  <div class="modal-header">
+    <h3 class="modal-title">Conferma l'indirizzo tra i seguenti suggeriti:</h3>
+  </div>
+  <div class="modal-body">
+    <form name="addressesValidationForm">
+      <div ng-repeat="address in addresses" ng-if="!address.success" class="suggestions-container">
+        <h3 ng-if="address.id == 0">Indirizzo primario:</h3>
+        <h3 ng-if="address.id == 1">Indirizzo secondario:</h3>
+        <h3 ng-if="address.id == 2">Indirizzo premium 1:</h3>
+        <h3 ng-if="address.id == 3">Indirizzo premium 2:</h3>
+        <p ng-if="address.suggestions.length == 0">Non abbiamo trovato corrispondenze</p>
+        <div class="address-suggestions" ng-repeat="suggestion in address.suggestions">
+          <input type="radio" class="address-suggestions-i-{{address.id}}" id="address-suggestion-{{address.id}}-{{$index}}" name="addressChoice{{address.id}}" ng-model="address.selected" value="{{$index}}" ng-disabled="address.error==true" required>
+          <label class="address-suggestions-l-{{address.id}}" for="address-suggestion-{{address.id}}-{{$index}}">{{suggestion.formattedAddress}}</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+    <button class="btn btn-primary" type="button" ng-disabled="addressesValidationForm.$invalid || validationFailed" ng-click="$close()">Procedi</button>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+	<table class="table admin-article-list">
+	  <thead>
+		  <tr>
+		    <th>Titolo</th>
+		    <th>Autore</th>
+		    <th>Data creazione</th>
+		    <th></th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr ng-repeat="article in articles | filter:filter">
+		    <td>{{article.title}}</td>
+		    <td>{{article.author.firstname}} {{article.author.lastname}}</td>
+		    <td>{{article.creation_date | date }}</td>
+		    <td>
+		    	<div class="btn-group btn-group-sm" style="display: flex">
+	        	<button type="button" class="btn btn-success" ng-click="$close(article)">Seleziona</button>
+	        </div>
+		    </td>
+		  </tr>
+	  </tbody>
+	</table>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-default" type="button" ng-click="$dismiss()">Annulla</button>
+</div>

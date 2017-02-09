@@ -1,0 +1,22 @@
+<table class="table admin-article-list">
+  <thead>
+	  <tr>
+	    <th>Titolo</th>
+	    <th>Autore</th>
+	    <th>Data creazione</th>
+	    <th></th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="article in articles">
+	    <td>{{article.title}}</td>
+	    <td>{{article.author.firstname}} {{article.author.lastname}}</td>
+	    <td>{{article.creation_date | date }}</td>
+	    <td>
+	    	<div class="btn-group btn-group-sm" style="display: flex">
+        	<button type="button" class="btn btn-success" ng-click="onChangeArticle({ article: article })">Cambia</button>
+        </div>
+	    </td>
+	  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,26 @@
+<a href="professionista/{{professionista._id}}">
+	<div class="media well biography">
+		<h3 ng-class="[{'private-channel': (isPrivateChannel(professionista) && professionista.role === 'qualified')}, 'media-heading']">{{professionista.title}} {{professionista.firstname}} {{professionista.lastname}}</h3>
+		<div class="media-left">
+			<user-image class="media-object"
+                   user="professionista"
+                  width="90"
+                 height="60"
+                   size="'small'"
+                 method="'contain'">
+      </user-image>
+		</div>
+		<div class="media-body">
+			<p class="date-specialization">{{professionista.specialization}}</p>
+			<p class="author">{{professionista.city}}</p>
+			<segui professionista="professionista"></segui>
+		</div>
+		<div ng-if="professionista.bio">
+			<h5>BIOGRAFIA</h5>
+			<p class="small">{{ professionista.bio | ellipsis:300 }}</p>
+			<p style="margin-bottom:0; text-align: center;">
+				<fai-domanda user-id="professionista._id" ng-if='professionista.role === "qualified"'></fai-domanda>	
+			</p>
+		</div>
+	</div>
+</a>

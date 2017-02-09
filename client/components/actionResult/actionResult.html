@@ -1,0 +1,12 @@
+<div ng-if="isOk" class="modal-body action-resault">
+  <p><i class="fa fa-check"></i></p>
+  <p class="alert-subimportant">Operazione avvenuta con successo!</p>
+  <p><a class="btn btn-default btn-lg" type="submit" href="/main">Torna alla Home</a></p>
+  <br>
+</div>
+<div ng-if="!isOk" class="modal-body action-resault">
+  <p><i class="fa fa-times"></i></p>
+  <p class="alert-subimportant">Ops, l'operazione non &egrave; riuscita.</p>
+  <br>
+  <p><a class="btn btn-default btn-lg" type="submit" ng-click="cancel()" href="">Riprova</a> <a class="btn btn-default btn-lg" type="submit" href="/main">Torna alla Home</a></p>
+</div>

@@ -1,0 +1,14 @@
+/*---------------Navbar ADMIN*/
+.navbar-light {
+    background: rgba(205,229,247,.4);
+}
+.navbar-light .nav-second-level{
+	background: #F5FAFD;
+}
+.navbar-light.sidebar ul li a.active, .navbar-light.sidebar ul li a:hover{
+	background: rgba(205,229,247,.6);
+}
+div.sidebar {
+  margin-top: 0px !important;
+}
+/*---------------End of Navbar ADMIN*/

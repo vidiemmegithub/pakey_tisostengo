@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="media box-evidence">
+            <div class="media-left">
+              <user-image class="media-object"
+                          user="professionista.user"
+                          width="300"
+                          height="246"
+                          size="'evidence'"
+                          method="'contain'">
+              </user-image>
+            </div>
+            <div class="media-body hidden-xs">
+              <div class="pull-right">
+                <segui professionista="professionista.user"></segui>
+              </div>
+              <h2 class="media-heading">{{professionista.user.title}} {{professionista.user.firstname}} {{professionista.user.lastname}}</h2>
+              <p class="date-specialization">{{professionista.user.specialization}} <span ng-if="professionista.isPremium()" ng-repeat="specialization in professionista.user.secondarySpecializations track by $index">· {{specialization}}</span></p>
+              <p class="private-channel"
+                  ng-show="professionista.isPrivateChannel() && professionista.user.role === 'qualified'"><i class="fa fa-key"></i> Riceve domande private</p>
+              <p class="user-counter" ng-hide="professionista.user.role === 'editor'"><i class="fa fa-heart-o"></i> {{professionista.user.statistics.follower}} follower</p>
+              <p class="user-counter"><i class="fa fa-file-text"></i></i> {{professionista.user.statistics.articles}} articoli pubblicati</p>
+              <p class="user-counter" ng-hide="professionista.user.role === 'editor'"><i class="fa fa-comments"></i> {{professionista.user.statistics.questions.received}} domande ricevute</p>
+            </div>
+
+            <div class="panel-body hidden-sm hidden-md hidden-lg">
+              <div class="pull-right">
+                <segui professionista="professionista.user"></segui>
+              </div>
+              <h2 class="media-heading">{{professionista.user.title}} {{professionista.user.firstname}} {{professionista.user.lastname}}</h2>
+              <p class="date-specialization">{{professionista.user.specialization}}</p>
+              <p class="private-channel"
+                  ng-show="professionista.isPrivateChannel()  && professionista.user.role === 'qualified'"><i class="fa fa-key"></i> Riceve domande private</p>
+              <p class="user-counter" ng-hide="professionista.user.role === 'editor'"><i class="fa fa-heart-o"></i> {{professionista.user.statistics.follower}} follower</p>
+              <p class="user-counter"><i class="fa fa-file-text"></i></i> {{professionista.user.statistics.articles}} articoli pubblicati</p>
+              <p class="user-counter" ng-hide="professionista.user.role === 'editor'"><i class="fa fa-comments"></i> {{professionista.user.statistics.questions.received}} domande ricevute</p>
+            </div>
+
+      	    <div class="col-sm-12" ng-if="professionista.user.bio">
+      	      <h5>BIOGRAFIA</h5>
+      	      <p>{{professionista.user.bio}}</p>
+      	    </div>
+          </div>
+          <h1>Articoli pubblicati</h1>
+          <div class="panel-body" ng-if="professionista.articles.length <= 0">
+            <p class="alert-important">Non sono presenti articoli</p>
+          </div>
+      	  <div class="row"
+      	       infinite-scroll="professionista.loadMoreArticles()"
+      	       infinite-scroll-disabled="professionista.isLoadingArticles || professionista.noMoreArticles">
+      	    <div class="col-sm-12 col-md-6" ng-repeat="article in professionista.articles">
+              <article-preview article='article'></article-preview>
+      	    </div>
+      	  </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-info admin-action" ng-if="professionista.isAdmin()">
+        <div class="panel-body text-center">
+          <p>
+            <a type="button"
+               class="btn btn-success btn-s"
+               ng-click="professionista.removeBan()"
+               ng-if="professionista.user.banned">
+              <i class="fa fa-check"></i> RIATTIVA</a>
+          </p>
+          <p>
+            <a type="button"
+               class="btn btn-warning btn-s"
+               ng-if="!professionista.user.banned"
+               ng-click="professionista.banUser()">
+              <i class="fa fa-ban"></i> BAN</a>
+          </p>
+          <p>
+            <a type="button"
+               class="btn btn-danger btn-s"
+               ng-click="professionista.deleteUser()">
+              <i class="fa fa-trash"></i> ELIMINA</a>
+          </p>
+          <p>
+            <a type="button"
+               class="btn btn-primary btn-s"
+               ng-click="professionista.showSubscriptions()"
+               ng-if="professionista.user.subscriptions.length > 0">
+               Pacchetti Premium</a>
+          </p>
+        </div>
+      </div>
+    	<div class="well biography">
+        <div class="media">
+          <div class="media-left">
+            <i class="fa fa-hospital-o uq-contacts"></i>
+          </div>
+      	  <div class="media-body">
+      	    <h4>{{professionista.user.city}} <span ng-if="professionista.user.province">({{professionista.user.province}})</span></h4>
+      	    <p class="date-specialization">{{professionista.user.address}} {{professionista.user.addressNumber}}</p>
+      	  </div>
+      	</div>
+        <div class="media" ng-if="professionista.user.secondaryCity && professionista.user.secondaryAddress">
+          <div class="media-left">
+            <i class="fa fa-hospital-o uq-contacts"></i>
+          </div>
+          <div class="media-body">
+            <h4>{{professionista.user.secondaryCity}} <span ng-if="professionista.user.secondaryProvince">({{professionista.user.secondaryProvince}})</span></h4>
+            <p class="date-specialization">{{professionista.user.secondaryAddress}} {{professionista.user.secondaryAddressNumber}}</p>
+          </div>
+        </div>
+      	<div class="media">
+          <div class="media-left">
+            <i class="fa fa-phone uq-contacts"></i>
+          </div>
+          <div class="media-body">
+            <h4>{{professionista.user.telephone}}</h4>
+          </div>
+          <br/>
+        </div>
+        <div class="media" ng-if="professionista.user.agreement">
+      	  <div class="media-left">
+      	    <i class="fa fa-certificate uq-agreement"></i>
+      	  </div>
+      	  <div class="media-body">
+      	    <h4>Convenzionato ente mutuo</h4>
+      	  </div>
+          <br/>
+        </div>
+        <div ng-if="professionista.isPremium()">
+          <div class="media" ng-repeat="address in professionista.user.operationalAddresses">
+            <div class="media-left">
+              <i class="fa fa-hospital-o uq-contacts"></i>
+            </div>
+            <div class="media-body">
+              <h4>{{address.city}} <span ng-if="address.province">({{address.province}})</span></h4>
+              <p class="date-specialization">{{address.address}}</p>
+            </div>
+          </div>
+          <div class="media" ng-if="professionista.user.web">
+            <div class="media-left">
+              <i class="fa fa-globe uq-contacts"></i>
+            </div>
+            <div class="media-body">
+              <a href="{{professionista.user.web}}">
+                <h4>Sito web</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p style="margin-bottom:0; text-align: center;">
+          <fai-domanda user-id="professionista.user._id" ng-if='professionista.user.role === "qualified"'></fai-domanda>
+        </p>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I Professionisti che segue</strong>
+        </div>
+      </div>
+      <div class="panel-body" ng-if="professionista.followed.length <= 0">
+        <p class="alert-subimportant">Non sono presenti professionisti</p>
+      </div>
+      <qualified-box professionista="seguiti" ng-repeat="seguiti in professionista.followed | limitTo:5"></qualified-box>
+      <advertisement></advertisement>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <strong>I TAG più usati</strong>
+        </div>
+      </div>
+      <tag-list tags='professionista.tags' limit='15'></tag-list>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>

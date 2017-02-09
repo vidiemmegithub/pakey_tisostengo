@@ -1,0 +1,8 @@
+
+.space{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+ .table-carepaths > tbody > tr > td.vertical-align{ 
+    vertical-align: middle;
+}

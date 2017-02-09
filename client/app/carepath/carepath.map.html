@@ -1,0 +1,61 @@
+<h1>MAPPA</h1>
+
+<div class="map-cont">
+  <div id="carepath-cont" class="col-xs-12 col-md-6">
+    <div class="carepath-tabbar">
+      <div class="tab" ng-class="(carepath.currentTab === 'path') ? 'tab-selected' : ''">
+          <a href="#path" ng-click="carepath.currentTab = 'path'">PERCORSO</a>
+      </div>
+      <div class="tab" ng-class="(carepath.currentTab === 'questionnaire') ? 'tab-selected' : ''">
+          <a href="#questionnaire" ng-click="carepath.currentTab = 'questionnaire'">QUESTIONARIO</a>
+      </div>
+    </div>
+
+    <div class="steps-container">
+      <div ng-repeat="step in carepath.carepath.steps | filter: carepath.filterStepsByYes" ng-if="carepath.currentTab === 'path'" class="step">
+        <div ng-class="!$last ? 'step-border' : 'step-border-transparent'">
+          <div class="step-index" data-line="{{$index+1}}">STEP {{$index+1}} - {{step.title}}</div>
+          <div class="step-description">{{step.description}}</div>
+          <div class="step-specialists col-xs-12">
+            <a ng-if="step.specialists[0].displayName" href="#" ng-click="carepath.onClickMarker(step.specialists[0]._id)">
+              <div class="col-xs-12 col-md-6 specialist" ng-class="step.specialists[0].isRanked ? 'ranked' : ''" data-order="{{carepath.specialistsOrder[$index][0]}}" ng-if="step.specialists[0]">{{step.specialists[0].displayName}}</div>
+            </a>
+            <a ng-if="step.specialists[1].displayName" href="#" ng-click="carepath.onClickMarker(step.specialists[1]._id)">
+              <div class="col-xs-12 col-md-6 specialist" data-order="{{carepath.specialistsOrder[$index][1]}}">{{step.specialists[1].displayName}}</div>
+            </a>
+            <a ng-if="!step.specialists[0].displayName && !step.specialists[1].displayName" href="#">
+              <div class="col-xs-12 specialist">Non ci sono professionisti nella tua zona</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p ng-if="((carepath.carepath.steps | filter: carepath.filterStepsByYes).length == 0) && carepath.currentTab === 'path'" class="no-carepath">Non è stato possibile trovare un percorso di cura</p>
+    </div>
+
+    <div ng-repeat="step in carepath.carepath.steps | filter: carepath.filterStepsByQuestion" ng-if="carepath.currentTab === 'questionnaire'" class="step-question">
+      <div class="step-question-index col-xs-2">{{$index+1}}</div>
+      <div class="step-question-text col-xs-8">{{step.question.text}}</div>
+      <div class="step-question-answer col-xs-2">
+        <div ng-class="(step.question[0].answer === 'yes') ? 'answer-yes' : 'answer-no'">{{(step.question.answer === 'no') ? 'No' : 'Sì'}}</div>
+      </div>
+    </div>
+    <div class="col-xs-12 reset-q">
+      <button ng-if="carepath.currentTab === 'questionnaire'" class="btn btn-primary btn-lg" ng-click="carepath.resetQuestionnaire()">Rifai il questionario</button>
+    </div>
+
+  </div>
+
+  <div ng-show="!carepath.mapError && carepath.mapLoaded" class="col-xs-12 col-md-6" id="tisosMap"></div>
+  <div ng-if="carepath.mapError && carepath.mapLoaded" class="col-xs-12 col-md-6 tisosMap">
+    <i class="fa fa-exclamation-triangle"></i>
+    <div>Si è verificato un problema durante il caricamento della mappa</div>
+  </div>
+  <div ng-if="carepath.mapLoaded===false" class="col-xs-12 col-md-6 tisosMap">
+    <i class="fa fa-spinner fa-spin"></i>
+    <div>Sto caricando la mappa...</div>
+  </div>
+  <div ng-if="carepath.fullContentLoaded===false">
+    <div class="overlay"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+</div>
+

@@ -1,0 +1,18 @@
+h1.article-title{
+  text-align: left;
+  font-size: 36px;
+}
+h1.article-title:after{
+  margin-left: 0;
+}
+.date-specialization + .thumbnail {
+  margin-top: 15px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+.date-specialization + .thumbnail img{
+  border-radius: 4px;
+}
+.admin-action a{
+	min-width: 90%;
+}

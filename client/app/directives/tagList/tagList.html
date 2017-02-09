@@ -1,0 +1,6 @@
+<div class="panel-body" ng-if="tags.length <= 0">
+	<p class="alert-subimportant">Non sono presenti tags</p>
+</div>
+<div class="panel">
+	<span class="label label-default" ng-repeat="tag in tags | limitTo: limit" ng-click="goTo(tag)">{{tag}}</span>
+</div>

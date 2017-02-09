@@ -1,0 +1,14 @@
+.user {
+  padding: 8px;
+  height: 60px;
+  line-height: 30px;
+  vertical-align: top;
+  border-bottom: 1px solid #ddd;
+}
+.user .td-user {
+  display: inline-block;
+  margin-right: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <h1>Servizi Premium</h1>
+      <div ng-if="!(premium.isLoggedIn() && premium.currentUser.role === 'unqualified' && premium.currentUser.registrationPending !== true)">
+        <h3 ng-hide="premium.currentUser.role === 'qualified' || premium.currentUser.registrationPending === true">Sei un professionista? Aggiungi funzionalità al tuo TiSOStengo con i Pacchetti Premium</h3>
+        <div class="row">
+          <div class="col-md-4 panel panel-premium">
+            <div class="panel-heading">
+              <h3 class="panel-title">Personalizzazione del profilo</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <img src="/assets/images/premium/personalizzazione_profilo.jpg" class="img-fluid center-block" alt="Personalizzazione del profilo">
+                <div ng-show="premium.isProfilePro()" class="premium-active"><i class="fa fa-check"></i> ATTIVO</div>
+              </div>
+              <div class="row premium-description">
+                <p class="premium-price">{{premium.plans['profile-pro'].price | currency}}<span>/mese</span></p>
+                <button ng-if="premium.isLoggedIn()" ng-disabled="(premium.isProfilePro() ||  premium.currentUser.role !== 'qualified')" type="button" class="btn btn-success" ng-click="premium.attiva('profile-pro')">ATTIVA</button>
+                <button ng-if="!premium.isLoggedIn()" show-login type="button" class="btn btn-success">ATTIVA</button>
+                <p>Aggiungi informazioni importanti che aiutino chi ha bisogno di te a raggiungerti più facilmente e a conoscerti meglio.</p>
+                <p>Anche un solo dettaglio in più può consentirti di dare una mano a qualcuno che ti sta cercando!</p>
+                <p>Potrai inserire tre <b>specializzazioni</b> aggiuntive, dare visibilità al tuo <b>sito web</b> e avrai <b>due indirizzi supplementari</b>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 panel panel-premium">
+            <div class="panel-heading">
+              <h3 class="panel-title">Canale Privato</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <img src="/assets/images/premium/domande_private.jpg" class="img-fluid center-block" alt="Canale privato">
+                <div ng-show="premium.isPrivateChannel()" class="premium-active"><i class="fa fa-check"></i> ATTIVO</div>
+              </div>
+              <div class="row premium-description">
+                <p class="premium-price">{{premium.plans['private-channel-uq'].price | currency}}<span>/mese</span></p>
+                <button ng-if="premium.isLoggedIn()" ng-disabled="(premium.isPrivateChannel() ||  premium.currentUser.role !== 'qualified')" type="button" class="btn btn-success" ng-click="premium.attiva('private-channel-uq')">ATTIVA</button>
+                <button ng-if="!premium.isLoggedIn()" show-login type="button" class="btn btn-success">ATTIVA</button>
+                <p>Apri una nuova <b>via di comunicazione</b> con gli altri iscritti, professionisti e non, in forma <b>del tutto riservata</b>.</p>
+                <p>Domanda, rispondi e mantieniti in contatto senza dovere condividere i contenuti con utenti terzi</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 panel panel-premium">
+            <div class="panel-heading">
+              <h3 class="panel-title">Indicizzazione</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <img src="/assets/images/premium/indicizzazione.jpg" class="img-fluid center-block" alt="Indicizzazione">
+                <div ng-show="premium.isRanking()" class="premium-active"><i class="fa fa-check"></i> ATTIVO</div>
+              </div>
+              <div class="row premium-description">
+                <p class="premium-price">{{premium.plans['ranking'].price | currency}}<span>/mese</span></p>
+                <button ng-if="premium.isLoggedIn()" ng-disabled="(premium.isRanking() ||  premium.currentUser.role !== 'qualified')" type="button" class="btn btn-success" ng-click="premium.attiva('ranking')">ATTIVA</button>
+                <button ng-if="!premium.isLoggedIn()" show-login type="button" class="btn btn-success">ATTIVA</button>
+                <p>Sai di essere il migliore?</p>
+                <p>Metti in risalto la tua professionalità.</p>
+                <p>Acquista un <b>posto in rilievo nella ricerca tra professionisti</b> e promuovi la tua attività raggiungendo nuovi utenti che cercano proprio qualcuno come te.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="!(premium.isLoggedIn() && (premium.currentUser.role === 'qualified' || premium.currentUser.registrationPending === true))">
+        <h3 ng-hide="premium.currentUser.role === 'unqualified' && premium.currentUser.registrationPending !== true">E se sei un privato, migliora la tua esperienza con il Pacchetto Premium dedicato a te</h3>
+        <div class="row">
+          <div class="col-md-12 panel panel-premium">
+            <div class="panel-heading">
+              <h3 class="panel-title">Canale Privato</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row premium-description">
+                <div class="col-md-4">
+                  <img src="/assets/images/premium/domande_private.jpg" class="img-fluid center-block" alt="Canale privato">
+                  <div ng-show="premium.isPrivateChannel()" class="premium-active"><i class="fa fa-check"></i> ATTIVO</div>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <p class="premium-price">{{premium.plans['private-channel-unq'].price | currency}}<span>/mese</span></p>
+                      <button ng-if="premium.isLoggedIn()" ng-disabled="(premium.isPrivateChannel() ||  premium.currentUser.role !== 'unqualified')" type="button" class="btn btn-success" ng-click="premium.attiva('private-channel-unq')">ATTIVA</button>
+                      <button ng-if="!premium.isLoggedIn()" show-login type="button" class="btn btn-success">ATTIVA</button>
+                    </div>
+                    <div class="col-md-7">
+                      <p>Apri una nuova <b>via di comunicazione</b> con i tuoi professionisti di fiducia in forma <b>del tutto riservata</b>.</p>
+                      <p>Fai domande e mantieniti in contatto, senza dovere condividere i contenuti con utenti terzi.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-12">
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>
+
+      <!--<form class="form" name="form" action="{{premium.url}}" novalidate method="post">
+        <braintree-dropin></braintree-dropin>
+        <input type="text"
+               name="discount"
+               value=""/>
+        <input type="submit"
+               value="Buy for $14"/>
+      </form>-->

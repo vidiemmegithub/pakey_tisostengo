@@ -1,0 +1,7 @@
+<a href="articolo/{{article._id}}" class="articles">
+<div class="well">
+	<h4>{{article.title}}</h4>
+	<p class="author">{{article.author.title}} {{article.author.firstname}} {{article.author.lastname}}</p>
+	<p class="date-specialization">{{ article.pub_date | date:'longDate' }}</p>
+</div>
+</a>

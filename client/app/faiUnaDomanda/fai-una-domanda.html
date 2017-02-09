@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <h1>Scrivi la domanda</h1>
+      </div>
+      <div class="row">
+        <div class="pull-left">
+          <p class="author">Risponderà {{faiUnaDomanda.professionista.title}} {{faiUnaDomanda.professionista.firstname}}
+            {{faiUnaDomanda.professionista.lastname}}</p>
+        </div>
+        <div class="pull-right"
+              ng-show="faiUnaDomanda.isPrivateChannel(faiUnaDomanda.professionista)">
+          <p class="private-channel"><i class="fa fa-key"></i> Riceve domande private</p>
+        </div>
+      </div>
+      <div lass="row">
+        <form name="questionForm" novalidate ng-submit="questionForm.$valid && faiUnaDomanda.submitQuestion(question)">
+          <h4 class="section-title">Scegli il tipo di domanda*</h4>
+          <div class="form-group">
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       ng-init="question.type='public'"
+                       name="questionType"
+                       value="public"
+                       ng-model="question.type"
+                       bs-has-error
+                       required>
+                Domanda pubblica
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       name="questionType"
+                       value="private"
+                       ng-model="question.type"
+                       bs-has-error
+                       ng-disabled="!faiUnaDomanda.isPrivateChannel(faiUnaDomanda.getCurrentUser()) || !faiUnaDomanda.isPrivateChannel(faiUnaDomanda.professionista)">
+                Domanda privata
+              </label>
+              <span class="badge-passa-premium"
+                    ng-show="!faiUnaDomanda.isPrivateChannel(faiUnaDomanda.getCurrentUser())">
+                Disponibile per profili premium
+                <a href="/servizi-premium" class="btn btn-yellow btn-xs">Passa a premium</a>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h4 class="section-title">Scrivi il testo della domanda*</h4>
+            <textarea class="form-control" name="questionText" ng-model="question.text" required
+                      bs-has-error></textarea>
+          </div>
+          <h4 class="section-title">Allega un file</h4>
+
+          <p ng-show="!question.files.length">Non ci sono file allegati a questa domanda</p>
+          <table class="table table-condensed" ng-show="question.files.length">
+            <tr ng-repeat="file in question.files">
+              <td>{{file.name}}</td>
+              <td>
+                <a href ng-click="question.files.splice(question.files.indexOf(file), 1)">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a></td>
+            </tr>
+          </table>
+          <button class="btn btn-default"
+                  ngf-select
+                  ngf-keep="true"
+                  ng-model="question.files"
+                  ngf-multiple="true">Aggiungi un allegato
+          </button>
+          <hr/>
+          <p class="small">* I campi contrassegnati da * sono obbligatori</p>
+          <div ng-messages="questionForm.questionText.$error">
+            <p class="text-danger small" ng-message="required">Il testo della domanda è obbligatorio</p>
+          </div>
+          <hr/>
+          <p class="small">
+            Le opinioni su argomenti di salute espresse dai professionisti all'interno delle loro risposte
+            non rappresentano necessariamente la posizione di tiSOStengo. <a href>Leggi il disclaimer</a>
+          </p>
+          <hr/>
+          <button type="submit" class="btn btn-primary" ng-disabled="questionForm.$invalid">Invia la domanda</button>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-md-3">
+      <qualified-detail professionista='faiUnaDomanda.professionista'></qualified-detail>
+      <hr class="hidden-md hidden-lg">
+        <div class="row">
+          <div class="col-xs-6 col-md-12">
+            <advertisement></advertisement>
+          </div>
+          <div class="col-xs-6 col-md-12">
+            <advertisement></advertisement>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

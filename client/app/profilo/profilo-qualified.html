@@ -1,0 +1,498 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Profilo</h1>
+      <uib-alert ng-repeat="alert in profilo.alerts" type="{{alert.type}}" close="alert.close()"><i class="fa fa-hourglass-half"></i> {{alert.msg}}</uib-alert>
+      <form name="profileForm" novalidate ng-submit="profileForm.$valid && profilo.save('uq')" class='col-sm-12 col-md-12'>
+        <div class="row">
+          <h4 class="section-title">Titolo</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label>Settore professionale di appartenenza *</label><br/>
+              <specialization-dropdown name="specialization"
+                                       choose="{{profilo.user.specialization}}"
+                                       ng-model="profilo.user.specialization"
+                                       valid-drop-down></specialization-dropdown>
+            </div>
+            <div ng-if="profilo.isPremium()">
+              <div class="form-group col-sm-6 col-md-6">
+                <label>Settore professionale di appartenenza Premium 2</label><br/>
+                <specialization-dropdown name="secondarySpecializations"
+                                         choose="{{profilo.user.secondarySpecializations[0]}}"
+                                         ng-model="profilo.user.secondarySpecializations[0]"
+                                         optional></specialization-dropdown>
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label>Settore professionale di appartenenza Premium 3</label><br/>
+                <specialization-dropdown name="secondarySpecializations"
+                                         choose="{{profilo.user.secondarySpecializations[1]}}"
+                                         ng-model="profilo.user.secondarySpecializations[1]"
+                                         optional></specialization-dropdown>
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label>Settore professionale di appartenenza Premium 4</label><br/>
+                <specialization-dropdown name="secondarySpecializations"
+                                         choose="{{profilo.user.secondarySpecializations[2]}}"
+                                         ng-model="profilo.user.secondarySpecializations[2]"
+                                         optional></specialization-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Dati utente</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="professionist-title">Titolo professionista</label>
+              <select class="form-control" id="professionist-title" ng-model="profilo.user.title" ng-options="title for title in profilo.professionalTitles">
+                <option value="">Seleziona un titolo</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="professionist-name">Nome professionista / Struttura / Esercizio *</label>
+              <input class="form-control"
+                     name="professionistName"
+                     id="professionist-name"
+                     required
+                     ng-model="profilo.user.firstname"
+                     bs-has-error>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="professionist-surname">Cognome professionista</label>
+              <input class="form-control" id="professionist-surname" ng-model="profilo.user.lastname">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="birthday">Data di nascita *</label>
+              <input type="text" class="form-control" id="birthday" name="birthday" uib-datepicker-popup="dd/MM/yyyy" ng-model="profilo.user.dateOfBirth" on-open-focus="false" show-button-bar="false" is-open="profilo.calendar.opened" ng-required="true" alt-input-formats="Data di nascita" ng-click="profilo.openCalendar()" placeholder="gg/mm/aaaa" required bs-has-error/>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label>Sesso</label><br/>
+              <div class="form-group col-xs-6 col-md-3">
+                <label>
+                  <input type="radio" ng-model="profilo.user.gender" value="M"> M
+                </label>
+              </div>
+              <div class="form-group col-xs-6 col-md-3">
+                <label>
+                  <input type="radio" ng-model="profilo.user.gender" value="F"> F
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="email">Email *</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     pattern="[a-z0-9._%+-]+@(?!mailinator)[a-z0-9.-]+\.[a-z]{2,4}$"
+                     bs-has-error
+                     required
+                     ng-model="profilo.user.email">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="phone">Telefono *</label>
+              <input class="form-control"
+                     id="phone"
+                     name="phone"
+                     bs-has-error
+                     ng-model="profilo.user.telephone"
+                     required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="interests">Interessi (separati da una virgola)</label>
+              <textarea class="form-control" id="interests" placeholder="Es. salute, benessere" name="interests" ng-model="profilo.user.interests"></textarea>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label>Immagine del profilo</label>
+              <div>
+                <img ngf-thumbnail="profilo.user.pictureFile || profilo.user.picture || 'assets/images/uqplaceholder.jpg'" ngf-size="{width: 150, quality: 1}" class="img-insert-preview">
+                <!--
+                <table class="table table-condensed" ng-show="profilo.user.pictureFile">
+                  <tr>
+                    <td>{{profilo.user.pictureFile.name}}</td>
+                    <td>
+                      <a href ng-click="profilo.user.pictureFile = null">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+                -->
+                <button class="btn btn-default"
+                        ng-model="profilo.user.pictureFile"
+                        ngf-select
+                        ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'">
+                  Carica un'immagine
+                </button>
+                <p class="small">L'immagine caricata deve avere dimensione massima di 1MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="profilo.isPremium()">
+          <div class="row">
+            <h4 class="section-title">Sito web Premium</h4>
+            <div class="row">
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="url">Sito web</label>
+                <input class="form-control" id="url" ng-model="profilo.user.web">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Indirizzo Principale</h4>
+          <div class="row">
+            <div class="form-group col-sm-5 col-md-5">
+              <label for="address">Via *</label>
+              <input required bs-has-error class="form-control" id="address" ng-model="profilo.user.address">
+            </div>
+            <div class="form-group col-sm-3 col-md-3">
+              <label for="addressNumber">Numero civico *</label>
+              <input required bs-has-error class="form-control" id="addressNumber" ng-model="profilo.user.addressNumber">
+            </div>
+            <div class="form-group col-sm-4 col-md-4">
+              <label for="city">Comune *</label>
+              <input required bs-has-error class="form-control" id="city" ng-model="profilo.user.city">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="cap">Cap *</label>
+              <input required bs-has-error class="form-control" id="cap" ng-model="profilo.user.zipCode">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="province">Provincia *</label>
+              <select class="form-control"
+                      id="province"
+                      name="province"
+                      ng-model="profilo.user.province"
+                      required
+                      bs-has-error
+                      ng-options="city for city in profilo.cities">
+                <option value="">Seleziona una città</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Indirizzo Secondario</h4>
+          <div class="row">
+            <div class="form-group col-sm-5 col-md-5">
+              <label for="secondary-address">Via</label>
+              <input class="form-control" id="secondary-address" ng-model="profilo.user.secondaryAddress">
+            </div>
+            <div class="form-group col-sm-3 col-md-3">
+              <label for="secondary-address">Numero civico</label>
+              <input class="form-control" id="secondary-address" ng-model="profilo.user.secondaryAddressNumber">
+            </div>
+            <div class="form-group col-sm-4 col-md-4">
+              <label for="secondary-city">Comune</label>
+              <input class="form-control" id="secondary-city" ng-model="profilo.user.secondaryCity">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="secondary-cap">Cap</label>
+              <input class="form-control" id="secondary-cap" ng-model="profilo.user.secondaryZipCode">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="secondary-province">Provincia</label>
+              <select class="form-control" id="secondary-province" ng-model="profilo.user.secondaryProvince" ng-options="city for city in profilo.cities">
+                <option value="">Seleziona una città</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div ng-if="profilo.isPremium()">
+          <div class="row">
+            <h4 class="section-title">Indirizzo Premium 1</h4>
+            <div class="row">
+              <div class="form-group col-sm-5 col-md-5">
+                <label for="premium-address">Via</label>
+                <input class="form-control" id="premium-address" ng-model="profilo.user.operationalAddresses[0].address">
+              </div>
+              <div class="form-group col-sm-3 col-md-3">
+                <label for="premium-address">Numero civico</label>
+                <input class="form-control" id="premium-address" ng-model="profilo.user.operationalAddresses[0].addressNumber">
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="premium-city">Comune</label>
+                <input class="form-control" id="premium-city" ng-model="profilo.user.operationalAddresses[0].city">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-cap">Cap</label>
+                <input class="form-control" id="premium-cap" ng-model="profilo.user.operationalAddresses[0].zipCode">
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-province">Provincia</label>
+                <select class="form-control" id="premium-province" ng-model="profilo.user.operationalAddresses[0].province" ng-options="city for city in profilo.cities">
+                  <option value="">Seleziona una città</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <h4 class="section-title">Indirizzo Premium 2</h4>
+            <div class="row">
+              <div class="form-group col-sm-5 col-md-5">
+                <label for="premium-address">Via</label>
+                <input class="form-control" id="premium-address" ng-model="profilo.user.operationalAddresses[1].address">
+              </div>
+              <div class="form-group col-sm-3 col-md-3">
+                <label for="premium-address">Numero civico</label>
+                <input class="form-control" id="premium-address" ng-model="profilo.user.operationalAddresses[1].addressNumber">
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="premium-city">Comune</label>
+                <input class="form-control" id="premium-city" ng-model="profilo.user.operationalAddresses[1].city">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-cap">Cap</label>
+                <input class="form-control" id="premium-cap" ng-model="profilo.user.operationalAddresses[1].zipCode">
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-province">Provincia</label>
+                <select class="form-control" id="premium-province" ng-model="profilo.user.operationalAddresses[1].province" ng-options="city for city in profilo.cities">
+                  <option value="">Seleziona una città</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!--
+          <div class="row">
+            <h4 class="section-title">Indirizzi Premium 3</h4>
+            <div class="row">
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-address">Via e numero civico</label>
+                <input class="form-control" id="premium-address" ng-model="profilo.user.operationalAddresses[2].address">
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-city">Comune</label>
+                <input class="form-control" id="premium-city" ng-model="profilo.user.operationalAddresses[2].city">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-cap">Cap</label>
+                <input class="form-control" id="premium-cap" ng-model="profilo.user.operationalAddresses[2].zipCode">
+              </div>
+              <div class="form-group col-sm-6 col-md-6">
+                <label for="premium-province">Provincia</label>
+                <select class="form-control" id="premium-province" ng-model="profilo.user.operationalAddresses[2].province" ng-options="city for city in profilo.cities">
+                  <option value="">Seleziona una città</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          -->
+        </div>
+        <div class="row">
+          <h4 class="section-title">Dati per Strutture Sanitarie, Commercianti, Farmacie e Parafarmacie, Enti No Profit</h4>
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-12">
+              <label for="owner">Nome Legale Rappresentante / Responsabile del Customer Care</label>
+              <input class="form-control" id="owner" ng-model="profilo.user.ownerOrCustomerCareRepresentative">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Biografia</h4>
+          <!--<p class="small">Il testo può essere lungo al massimo 500 caratteri</p>-->
+          <div class="row">
+            <div class="form-group col-sm-12 col-md-12">
+              <textarea class="form-control" id="biography" ng-model="profilo.user.bio" bs-has-error></textarea>
+              <!--<textarea class="form-control" id="biography" maxlength="500" ng-model="profilo.user.bio" bs-has-error></textarea>-->
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-if="profilo.isNewUser">
+          <h4 class="section-title">Password</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="password">Password</label>
+              <input type="password"
+                     class="form-control"
+                     id="password"
+                     name="password"
+                     bs-has-error
+                     ng-model="profilo.user.password"
+                     required>
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="password-confirm">Conferma password</label>
+              <input type="password"
+                     class="form-control"
+                     id="password-confirm"
+                     name="passwordConfirm"
+                     bs-has-error
+                     ng-required="profilo.user.password"
+                     ng-model="profilo.user.passwordConfirm"
+                     ui-validate="{ confirmMatches: '$value==profilo.user.password' }"
+                     ui-validate-watch="'profilo.user.password'">
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-if="!profilo.isNewUser">
+          <h4 class="section-title">Cambio password</h4>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="old-password">Vecchia password</label>
+              <input type="password" class="form-control" id="old-password" name="old-password" ng-model="profilo.user.oldPassword" bs-has-error ng-required="profilo.user.password">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="new-password">Nuova password</label>
+              <input type="password"
+                     class="form-control"
+                     id="new-password"
+                     ng-model="profilo.user.password">
+            </div>
+            <div class="form-group col-sm-6 col-md-6">
+              <label for="new-password-confirm">Conferma nuova password</label>
+              <input type="password"
+                     class="form-control"
+                     id="new-password-confirm"
+                     name="passwordConfirm"
+                     ng-disabled="!profilo.user.password"
+                     bs-has-error
+                     ng-required="profilo.user.password"
+                     ng-model="profilo.user.passwordConfirm"
+                     ui-validate="{ confirmMatches: '$value==profilo.user.password' }"
+                     ui-validate-watch="'profilo.user.password'">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Convenzione ente mutuo</h4>
+          <div class="form-group">
+            <div class="checkbox">
+              <label ng-if="!profilo.isNewUser || !profilo.isAdmin()">
+                <input type="checkbox" name="agreement" ng-model="profilo.user.agreement" ng-disabled="!profilo.isNewUser && !profilo.isAdmin()">
+                Convenzionato
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="section-title">Completamento della procedura di iscrizione</h4>
+          <!--<p class="small"><strong>La procedura di iscrizione completa come professionista o struttura specialistica, sarà disponibile entro Febbraio.</strong><br>
+            Ti terremo informato sulle fasi finali dello sviluppo tramite i nostri canali social <a href="https://www.facebook.com/Tisostengoit-232010107138073/?ref=hl" target="_blank">Facebook</a>, <a href="https://twitter.com/tiSOStengo_" target="_blank">Twitter</a> e <a href="https://www.linkedin.com/company/tisostengo-it?trk=nav_account_sub_nav_company_admin" target="_blank">Linkedin</a> e ti invitiamo a completare il processo di iscrizione non appena la piattaforma sarà operativa al 100%.</p>
+          <p class="small"><strong>Nel frattempo potrai inviare domande ed accedere ai contenuti riservati agli iscritti a tiSOStengo.it</strong></p>
+          <p class="small">Ci farà anche molto piacere ricevere la tua opinione: segnalaci cosa ti piacerebbe trovare in futuro e gli aspetti che per te dovremmo migliorare!<br>
+            Scrivici a <a href="mailto:info@tisostengo.it" target="_blank">info@tisostengo.it</a></p>
+          <p><a href="assets/moduli_certificazione/disponibile_a_breve.pdf" download="disponibile_a_breve.pdf" target="_blank" class="btn btn-default">Come completare la procedura di iscrizione</a></p>-->
+
+          <p class="small">Per completare la procedura di iscrizione come professionista o struttura specialistica,
+            compila, firma ed invia il modulo scaricabile all'indirizzo email
+            <a href="mailto:utenti@tisostengo.it" target="_blank">utenti@tisostengo.it</a>
+          </p>
+          <p class="small">Il tuo profilo sarà verificato e abilitato a scrivere articoli e ricevere domande dagli utenti.</p>
+          <p class="small">Nel frattempo potrai inviare domande ed accedere ai contenuti riservati agli iscritti a tiSOStengo.it</p>
+          <p><a href="assets/moduli_certificazione/certificazione_tisostengo_professionista_medici.pdf" download="certificazione_tisostengo_professionista_medici.pdf" target="_blank" class="btn btn-default">Modulo di certificazione per Medici e Professionisti</a></p>
+          <p><a href="assets/moduli_certificazione/certificazione_tisostengo_entinoprofit_strutture.pdf" download="certificazione_tisostengo_entinoprofit_strutture.pdf" target="_blank" class="btn btn-default">Modulo di certificazione per Enti No Profit e Strutture Sanitarie</a></p>
+          <p><a href="assets/moduli_certificazione/certificazione_tisostengo_struttura.pdf" download="certificazione_tisostengo_struttura.pdf" target="_blank" class="btn btn-default">Modulo di certificazione per Farmacie, Parafarmacie, Commercianti e Strutture</a></p>
+
+        </div>
+        <div class="row">
+          <h4 class="section-title">Autorizzazione al trattamento dei dati</h4>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" bs-has-error required name="privacy" ng-model="privacy">
+                  Autorizzo il trattamento dei miei dati personali *
+                  <a href="#">Leggi l'informativa</a>
+                </label>
+              </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <p class="small">* I campi contrassegnati da * sono obbligatori</p>
+          <hr/>
+          <div ng-messages="profileForm.specialization.$error">
+            <p class="text-danger small" ng-message="required">Il settore professionale d'appartenenza è obbligatorio</p>
+          </div>
+          <div ng-messages="profileForm.professionistName.$error">
+            <p class="text-danger small" ng-message="required">Il nome di professionista, struttura o esercizio è obbligatorio</p>
+          </div>
+          <div ng-messages="profileForm.birthday.$error">
+            <p class="text-danger small" ng-message="date">La data di nascita è obbligatoria</p>
+            <p class="text-danger small" ng-message="required">La data di nascita è obbligatoria</p>
+          </div>
+          <div ng-messages="profileForm.email.$error">
+            <p class="text-danger small" ng-message="email">L'indirizzo email non è valido</p>
+            <p class="text-danger small" ng-message="required">L'indirizzo email è obbligatorio</p>
+          </div>
+          <div ng-messages="profileForm.phone.$error">
+            <p class="text-danger small" ng-message="required">Il numero di telefono è obbligatorio</p>
+          </div>
+          <div ng-messages="profileForm.province.$error || profileForm.city.$error || profileForm.address.$error || profileForm.addressNumber.$error || profileForm.zipCode.$error">
+            <p class="text-danger small" ng-message="required">I campi dell'indirizzo principale sono obbligatori</p>
+          </div>
+          <div ng-messages="profileForm.password.$error">
+            <p class="text-danger small" ng-message="required">La password è obbligatoria</p>
+          </div>
+          <div ng-messages="profileForm.passwordConfirm.$error">
+            <p class="text-danger small" ng-message="required">La conferma password è obbligatoria</p>
+            <p class="text-danger small" ng-message="confirmMatches">La conferma password deve essere uguale alla password</p>
+          </div>
+          <div ng-messages="profileForm.privacy.$error">
+            <p class="text-danger small" ng-message="required">Il consenso al trattamento dei dati è obbligatorio</p>
+          </div>
+          <div class="form-group has-error">
+            <p class="help-block">{{ profilo.errors.other }}</p>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <button type="submit" ng-disabled="profileForm.$invalid" class="btn btn-primary btn-lg">Salva</button>
+        </div>
+      </form>
+      <div class="clearfix"></div>
+      <servizi-premium subscriptions="profilo.user.subscriptions"></servizi-premium>
+    </div>
+    <div class="col-md-3">
+      <passa-premium>Scopri i vantaggi di Premium</passa-premium>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="qualified-user-registration.html">
+  <div class="modal-body unqualified-signup-confirmation">
+    <p><i class="fa fa-check"></i></p>
+    <p class="alert-important">Registrazione effettuata!</p>
+    <p class="alert-subimportant">Hai quasi finito...</p>
+    <p class="alert-important">Controlla le tue e-mail e clicca sul link di conferma della registrazione.
+      <br>Il messaggio potrebbe essere catalogato come posta indesiderata o spam. Ricordati di controllare anche queste cartelle.
+    </p>
+    <p class="alert-subimportant">
+      Per iniziare la tua attività come Professionista su tiSOStengo.it<br>
+      è necessario ricevere <b>la nostra certificazione</b>.<br>
+      Assicurati di aver mandato via e-mail i documenti specificati in fase di registrazione.<br>
+      Riceverai l'esito in pochi giorni.
+    </p>
+    <p class="alert-subimportant">
+      Nel frattempo potrai leggere tutti i contenuti completi, commentarli e fare domande agli altri specialisti.
+    </p>
+    <p class="alert-important">Benvenuto su tiSOStengo.it</p>
+    <p><a class="btn btn-default btn-lg" type="submit" href="/home">Ok</a></p>
+    <br>
+  </div>
+</script>

@@ -1,0 +1,34 @@
+<table class="table admin-users-list">
+	<thead>
+		<tr>
+		  <th>Nome</th>
+		  <th>Attivazione</th>
+		  <th>Disattivazione</th>
+		  <th>Prezzo</th>
+		  <th>Coupon</th>
+		  <th>Stato</th>
+		  <th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users | filter:filter">
+		  <td><a href="/professionista/{{user._id}}">{{user.firstname}} {{user.lastname}}</a></td>
+		  <td>{{getActivationData(user) | date }}</td>
+		  <td>{{getDeactivationData(user) | date }}</td>
+		  <td>{{getPrice(user) | currency}}</td>
+		  <td>{{getCoupon(user).text}}</td>
+		  <td class="{{getStatus(user) ? 'green' : 'red'}}">{{getStatus(user) ? 'Attivo' : 'Non Attivo'}}</td>
+		  <td>
+		    <div role="group">
+		      <button ng-if="getStatus(user) && !getDeactivationData(user)"
+		      				ng-click="onRemoveService({ user: user, service: service })"
+		              type="button"
+		              class="btn btn-sm btn-danger" 
+		              uib-tooltip="Disattiva servizio">
+		        <i class="fa fa-minus-square"></i>
+		      </button>
+		    </div>
+		  </td>
+		</tr>
+	</tbody>
+</table>

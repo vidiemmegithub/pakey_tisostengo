@@ -1,0 +1,11 @@
+<div class="btn-group" uib-dropdown dropdown-append-to-body>
+  <button type="button" class="btn btn-default" uib-dropdown-toggle>
+    {{model.$viewValue}} <span class="caret"></span>
+  </button>
+  <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+    <li ng-repeat="category in categories" role="menuitem"
+        ng-class="{ active: model.$viewValue === category }">
+      <a href ng-click="model.$setViewValue(category)">{{category}}</a>
+    </li>
+  </ul>
+</div>

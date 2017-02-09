@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Hai cercato “{{cercaProfessionisti.text}}”</h1>
+      <nav class="navbar navbar-info filters">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <p class="navbar-text">Filtri</p>
+            </ul>
+            <form class="navbar-form navbar-left">
+              <specialization-dropdown ng-model="cercaProfessionisti.filters.specialization"></specialization-dropdown>
+              <cities-dropdown ng-model="cercaProfessionisti.filters.city"></cities-dropdown>
+            </form>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+      <div class="panel-body" ng-if="cercaProfessionisti.professionisti.length <= 0">
+      	<p class="alert-subimportant">Non sono presenti professionisti che soddisfino il criterio di ricerca scelto</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-md-6" ng-repeat="professionista in cercaProfessionisti.professionistiPremium | limitTo:2">
+          <a class="boxed-list" href="/professionista/{{professionista._id}}">
+            <div class="thumbnail box-articles uq-list">
+              <user-image class="media-object"
+                          user="professionista"
+                          width="400"
+                          height="270"
+                          size="'evidence'"
+                          method="'contain'">
+              </user-image>
+              <div class="caption">
+                <h3>{{professionista.title}} {{professionista.firstname}} {{professionista.lastname}}</h3>
+                <p class="date-specialization">{{professionista.specialization}}</p>
+                <p class="author">{{professionista.city}}</p>
+                <fai-domanda user-id="professionista._id"  ng-if='professionista.role === "qualified"'></fai-domanda>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row"
+           infinite-scroll="cercaProfessionisti.loadMoreProfessionisti()"
+           infinite-scroll-disabled="cercaProfessionisti.isLoadingProfessionisti || cercaProfessionisti.noMoreProfessionisti">
+        <div class="col-sm-6 col-md-4" ng-repeat="professionista in cercaProfessionisti.professionisti">
+          <a class="boxed-list" href="/professionista/{{professionista._id}}">
+            <div class="thumbnail box-articles uq-list">
+              <user-image class="media-object"
+                             user="professionista"
+                               width="270"
+                              height="180"
+                                size="'evidence'"
+                              method="'contain'">
+                </user-image>
+              <div class="caption">
+                <h3>{{professionista.title}} {{professionista.firstname}} {{professionista.lastname}}</h3>
+                <p class="date-specialization">{{professionista.specialization}}</p>
+                <p class="author">{{professionista.city}}</p>
+                <fai-domanda user-id="professionista._id"  ng-if='professionista.role === "qualified"'></fai-domanda>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div ng-if="(cercaProfessionisti.professionistiPremium | limitTo:3:2).length">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>Profili Premium</strong>
+          </div>
+        </div>
+        <qualified-box professionista="professionista" ng-repeat="professionista in cercaProfessionisti.professionistiPremium | limitTo:3:2"></qualified-box>
+      </div>
+      <passa-premium ng-if="cercaProfessionisti.qualifiedUserWithoutRankingSubscription()">
+        Vuoi comparire nei primi risultati di ricerca?
+      </passa-premium>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+
+</div>

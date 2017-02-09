@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>Le mie domande</h1>
+      <uib-tabset>
+        <uib-tab heading="In attesa di risposta">
+          <div class="row">
+      	    <div class="panel-body" ng-if="mieDomande.questions.length <= 0">
+      	      <p class="alert-subimportant">Non sono presenti domande inviate</p>
+      	    </div>
+            <ul class="media-list">
+              <li class="box-question" ng-repeat="question in mieDomande.questions | filter: notAnswer">
+                <div class="col-md-8">
+		              <h4 class="media-heading" ng-bind-html="question.text"></h4>
+		              <p class="date-specialization"><i class="fa fa-sign-out"></i> Domanda inviata il {{ question.date | date:'longDate' }}</p>
+                  <p ng-if="question.read_date" class="date-specialization"><i class="fa fa-check-square-o"></i> Domanda letta il {{ question.read_date | date:'longDate' }}</p>
+                  <p ng-if="!question.read_date" class="date-specialization"><i class="fa fa-minus-square-o"></i> Domanda non letta</p>
+                  <p class="private-channel" ng-show="question.type === 'private'" style=""><i class="fa fa-key"></i> Domanda privata</p>
+                </div>
+                <div class="col-md-4 qualified-in-question">
+                  <div class="media well">
+		                <a href="professionista/{{question.target_user._id}}">
+		                  <h3 class="media-heading">Risponde {{question.target_user.title}} {{question.target_user.firstname}} {{question.target_user.lastname}}</h3>
+		                </a>
+                    <div class="media-left">
+                      <user-image class="media-object"
+			                             user="question.target_user"
+			                            width="90"
+			                           height="60"
+			                             size="'small'"
+			                           method="'contain'">
+                      </user-image>
+                    </div>
+                    <div class="media-body">
+                      <p class="date-specialization">{{question.target_user.specialization}}</p>
+                      <p class="author">{{question.target_user.city}}</p>
+                    </div>
+                    <fai-domanda user-id="question.target_user._id" ng-if='question.target_user.role === "qualified"'></fai-domanda>
+                  </div>
+                </div>
+                <div class="clear"></div>
+              </li>
+            </ul>
+          </div>
+        </uib-tab>
+        <uib-tab heading="Risposte ricevute">
+          <div class="row">
+      	    <div class="panel-body" ng-if="mieDomande.questions.length <= 0">
+      	      <p class="alert-subimportant">Non sono presenti domande con risposta</p>
+      	    </div>
+            <ul class="media-list">
+              <li class="box-question" ng-repeat="question in mieDomande.questions | filter: asAnswer">
+                <div class="col-md-8">
+                  <a href="/domanda/{{question._id}}">
+                    <h4 class="media-heading" ng-bind-html="question.text"></h4>
+		                <p class="date-specialization"><i class="fa fa-sign-out"></i> Domanda inviata il {{ question.date | date:'longDate' }}</p>
+                    <p class="date-specialization"><i class="fa fa-sign-in"></i> Risposta arrivata il {{ question.pub_date | date:'longDate' }}</p>
+                    <p class="private-channel" ng-show="question.type === 'private'" style=""><i class="fa fa-key"></i> Domanda privata</p>
+                  </a>
+                </div>
+                <div class="col-md-4 qualified-in-question">
+                  <div class="media well">
+            		    <a href="professionista/{{question.target_user._id}}">
+            		      <h3 class="media-heading">Risponde {{question.target_user.title}} {{question.target_user.firstname}} {{question.target_user.lastname}}</h3>
+            		    </a>
+                    <div class="media-left">
+                      <user-image class="media-object"
+			                             user="question.target_user"
+			                            width="90"
+			                           height="60"
+			                             size="'small'"
+			                           method="'contain'">
+                      </user-image>
+                    </div>
+                    <div class="media-body">
+                    	<p class="date-specialization">{{question.target_user.specialization}}</p>
+                      <p class="author">{{question.target_user.city}}</p>
+                    </div>
+                    <fai-domanda user-id="question.target_user._id" ng-if='question.target_user.role === "qualified"'></fai-domanda>
+                  </div>
+                </div>
+                <div class="clear"></div>
+              </li>
+            </ul>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-body">
+          <p class="user-counter"><i class="fa fa-comments"></i> {{mieDomande.user.statistics.questions.sent}} domande inviate</p></p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{mieDomande.user.statistics.answers.received}} risposte ricevute</p>
+          <p class="user-counter"><i class="fa fa-comments"></i> {{mieDomande.user.statistics.questions.sent - mieDomande.user.statistics.answers.received}} risposte in attesa</p>
+      </div>
+      <advertisement></advertisement>
+      <advertisement></advertisement>
+    </div>
+  </div>
+</div>
+

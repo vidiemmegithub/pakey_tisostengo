@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3 class="modal-title">Servizi Premium di {{user.firstname}} {{user.lastname}}</h3>
+</div>
+<div class="modal-body">
+	<table class="table admin-users-list">
+		<thead>
+			<tr>
+			  <th>Servizio</th>
+			  <th>Attivazione</th>
+			  <th>Disattivazione</th>
+			  <th>Prezzo</th>
+			  <th>Coupon</th>
+			  <th>Stato</th>
+			  <th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="subscription in user.subscriptions">
+			  <td>{{describeService(subscription.name)}}</td>
+			  <td>{{subscription.sold_date | date }}</td>
+			  <td>{{subscription.deactivation_date | date}}</td>
+			  <td>{{subscription.sold_price | currency}}</td>
+			  <td>{{subscription.coupon.text}}</td>
+			  <td class="{{subscription.active ? 'green' : 'red'}}">{{subscription.active ? 'Attivo' : 'Non Attivo'}}</td>
+			  <td>
+			    <div role="group">
+			      <button ng-if="getStatus(user)"
+			      				ng-click="onRemoveService({ user: user, service: service })"
+			              type="button"
+			              class="btn btn-sm btn-danger" 
+			              uib-tooltip="Disattiva servizio">
+			        <i class="fa fa-minus-square"></i>
+			      </button>
+			    </div>
+			  </td>
+			</tr>
+		</tbody>
+	</table>
+</div>
